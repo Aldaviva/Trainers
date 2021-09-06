@@ -7,9 +7,9 @@ using System.Windows.Interop;
 
 #nullable enable
 
-namespace SuperhotMindControlDeleteTrainer {
+namespace TrainerCommon.Trainer {
 
-    internal static class Win32 {
+    public static class Win32 {
 
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
@@ -95,7 +95,7 @@ namespace SuperhotMindControlDeleteTrainer {
             IntPtr hSnap       = CreateToolhelp32Snapshot(SnapshotFlags.MODULE | SnapshotFlags.MODULE32, procId);
 
             if (hSnap.ToInt64() != INVALID_HANDLE_VALUE) {
-                var modEntry = new ModuleEntry32 { structSizeBytes = (uint) Marshal.SizeOf(typeof(ModuleEntry32)) };
+                ModuleEntry32 modEntry = new() { structSizeBytes = (uint) Marshal.SizeOf(typeof(ModuleEntry32)) };
 
                 if (Module32First(hSnap, ref modEntry)) {
                     do {
@@ -139,7 +139,7 @@ namespace SuperhotMindControlDeleteTrainer {
         private const int WS_MAXIMIZEBOX = 0x10000;
         private const int WS_MINIMIZEBOX = 0x20000;
 
-        internal static void hideMinimizeAndMaximizeButtons(Window window) {
+        public static void hideMinimizeAndMaximizeButtons(Window window) {
             IntPtr windowHandle        = new WindowInteropHelper(window).Handle;
             int    existingWindowStyle = GetWindowLong(windowHandle, GWL_STYLE);
             SetWindowLong(windowHandle, GWL_STYLE, existingWindowStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX);

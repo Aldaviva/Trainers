@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
-[assembly: AssemblyDescription("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
+[assembly: AssemblyTitle("Dakar 18 v.13 +1 Trainer")]
+[assembly: AssemblyDescription("Dakar 18 v.13 +1 Trainer")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
-[assembly: AssemblyProduct("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
+[assembly: AssemblyProduct("Dakar 18 v.13 +1 Trainer")]
 [assembly: AssemblyCopyright("© 2021 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

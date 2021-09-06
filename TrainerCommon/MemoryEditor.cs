@@ -6,7 +6,7 @@ using System.Text;
 
 #nullable enable
 
-namespace SuperhotMindControlDeleteTrainer {
+namespace TrainerCommon.Trainer {
 
     public interface MemoryEditor {
 
@@ -22,8 +22,8 @@ namespace SuperhotMindControlDeleteTrainer {
 
         public ProcessHandle? openProcess(Process targetProcess) {
             IntPtr handle = Win32.OpenProcess(
-                Win32.ProcessAccessFlags.VIRTUAL_MEMORY_READ | 
-                Win32.ProcessAccessFlags.VIRTUAL_MEMORY_WRITE | 
+                Win32.ProcessAccessFlags.VIRTUAL_MEMORY_READ |
+                Win32.ProcessAccessFlags.VIRTUAL_MEMORY_WRITE |
                 Win32.ProcessAccessFlags.VIRTUAL_MEMORY_OPERATION,
                 false, targetProcess.Id);
             return handle != IntPtr.Zero ? new ProcessHandle(targetProcess, handle) : null;
@@ -54,7 +54,7 @@ namespace SuperhotMindControlDeleteTrainer {
         }
 
         private static byte[] convertValueToBuffer<T>(T value) {
-            var valueObject = (object) value!;
+            object valueObject = value!;
 
             return Type.GetTypeCode(typeof(T)) switch {
                 TypeCode.String => Encoding.Unicode.GetBytes((string) valueObject),
@@ -64,14 +64,7 @@ namespace SuperhotMindControlDeleteTrainer {
         }
 
         internal static IntPtr? getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
-            IntPtr? moduleBaseAddress;
-            if (moduleName == null) {
-                moduleBaseAddress = processHandle.process.MainModule?.BaseAddress;
-            } else {
-                moduleBaseAddress = Win32.getModuleBaseAddress(new IntPtr(processHandle.process.Id), moduleName);
-            }
-
-            return moduleBaseAddress;
+            return moduleName == null ? processHandle.process.MainModule?.BaseAddress : Win32.getModuleBaseAddress(new IntPtr(processHandle.process.Id), moduleName);
         }
 
         private static T convertBufferToType<T>(byte[] buffer) {
@@ -95,7 +88,7 @@ namespace SuperhotMindControlDeleteTrainer {
         }
 
         private void dispose(bool disposing) {
-            Win32.CloseHandle(handle);
+            _ = Win32.CloseHandle(handle);
             if (disposing) {
                 process.Dispose();
             }

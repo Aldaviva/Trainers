@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 #nullable enable
 
-namespace SuperhotMindControlDeleteTrainer {
+namespace TrainerCommon.Trainer {
 
     public interface MemoryAddress {
 
@@ -39,7 +39,7 @@ namespace SuperhotMindControlDeleteTrainer {
             get {
                 IntPtr moduleBaseAddress = MemoryEditorImpl.getModuleBaseAddressByName(processHandle, moduleName) ??
                     throw new ArgumentException($"No module with name {moduleName} found in process {processHandle.process.ProcessName}");
-                int    firstOffset         = offsets.First();
+                int    firstOffset   = offsets.First();
                 IntPtr memoryAddress = IntPtr.Add(moduleBaseAddress, firstOffset);
 
                 int targetProcessWordLengthBytes = Win32.isProcess64Bit(processHandle.process) ? Marshal.SizeOf<long>() : Marshal.SizeOf<int>();

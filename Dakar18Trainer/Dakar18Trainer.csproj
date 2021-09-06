@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23FF6D01-7F12-40B5-AD86-E280B44EF3F3}</ProjectGuid>
+    <ProjectGuid>{3BE3E23B-47D3-4F95-BF4F-2CDE5D7FD8A3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SuperhotMindControlDeleteTrainer</RootNamespace>
-    <AssemblyName>SuperhotMindControlDeleteTrainer</AssemblyName>
+    <RootNamespace>Dakar18Trainer</RootNamespace>
+    <AssemblyName>Dakar18Trainer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -25,7 +25,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,12 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>
-    </NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>App\shmcd.ico</ApplicationIcon>
+    <ApplicationIcon>App\dakar steam icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,14 +56,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cheats\InfiniteHealthCheat.cs" />
-    <Compile Include="Games\SuperhotMindControlDelete.cs" />
     <Compile Include="App\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\Dakar18.cs" />
+    <Compile Include="Cheats\NoSpeedLimitCheat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -76,19 +72,19 @@
     <None Include="App\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="App\shmcd.ico" />
+    <ProjectReference Include="..\TrainerCommon\TrainerCommon.csproj">
+      <Project>{42468631-d2df-4922-a393-95e2bf88227a}</Project>
+      <Name>TrainerCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ILRepack.Lib.MSBuild.Task">
       <Version>2.0.18.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TrainerCommon\TrainerCommon.csproj">
-      <Project>{42468631-d2df-4922-a393-95e2bf88227a}</Project>
-      <Name>TrainerCommon</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="App\dakar steam icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
