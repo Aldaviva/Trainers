@@ -11,15 +11,13 @@ namespace Dakar18Trainer.Cheats {
 
         private static readonly int[] SPEED_LIMIT_OFFSETS = { 0x04194850, 0x28, 0x1A0, 0x1B0, 0xA0, 0x20, 0x20, 0x830, 0x3A8 };
 
-        public override string name { get; } = "No speed limits";
+        public override string name { get; } = "No speed limit";
 
         public override Combination keyboardShortcut { get; } = Combination.TriggeredBy(Keys.L).Control().Alt();
 
-        public override void applyIfNecessary(ProcessHandle processHandle, MemoryEditor memoryEditor) {
-            if (!isEnabled.Value) return;
-
+        protected override void apply(ProcessHandle processHandle) {
             IndirectMemoryAddress speedLimitAddress = new(processHandle, null, SPEED_LIMIT_OFFSETS);
-            memoryEditor.writeToProcessMemory(processHandle, speedLimitAddress, 9999);
+            MemoryEditor.writeToProcessMemory(processHandle, speedLimitAddress, 9999);
         }
 
     }

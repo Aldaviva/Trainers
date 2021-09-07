@@ -14,7 +14,7 @@ namespace TrainerCommon.Cheats {
 
         SettableProperty<bool> isEnabled { get; }
 
-        void applyIfNecessary(ProcessHandle processHandle, MemoryEditor memoryEditor);
+        void applyIfNecessary(ProcessHandle processHandle);
 
     }
 
@@ -22,9 +22,15 @@ namespace TrainerCommon.Cheats {
 
         public abstract string name { get; }
         public abstract Combination keyboardShortcut { get; }
-        public abstract void applyIfNecessary(ProcessHandle processHandle, MemoryEditor memoryEditor);
+        protected abstract void apply(ProcessHandle processHandle);
 
         public SettableProperty<bool> isEnabled { get; } = new StoredProperty<bool>();
+
+        public void applyIfNecessary(ProcessHandle processHandle) {
+            if (isEnabled.Value) {
+                apply(processHandle);
+            }
+        }
 
     }
 

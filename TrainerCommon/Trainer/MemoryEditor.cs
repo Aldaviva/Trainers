@@ -8,21 +8,9 @@ using System.Text;
 
 namespace TrainerCommon.Trainer {
 
-    public interface MemoryEditor {
+    public static class MemoryEditor {
 
-        ProcessHandle? openProcess(Process targetProcess);
-
-        public T readFromProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, int? bytesToRead = null);
-
-        void writeToProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, T value);
-
-        IntPtr? getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName);
-
-    }
-
-    public class MemoryEditorImpl: MemoryEditor {
-
-        public ProcessHandle? openProcess(Process targetProcess) {
+        public static ProcessHandle? openProcess(Process targetProcess) {
             IntPtr handle = Win32.OpenProcess(
                 Win32.ProcessAccessFlags.VIRTUAL_MEMORY_READ |
                 Win32.ProcessAccessFlags.VIRTUAL_MEMORY_WRITE |
@@ -31,7 +19,7 @@ namespace TrainerCommon.Trainer {
             return handle != IntPtr.Zero ? new ProcessHandle(targetProcess, handle) : null;
         }
 
-        public T readFromProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, int? bytesToRead = null) {
+        public static T readFromProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, int? bytesToRead = null) {
             bytesToRead ??= Marshal.SizeOf<T>();
 
             byte[] buffer = new byte[(int) bytesToRead];
@@ -45,7 +33,7 @@ namespace TrainerCommon.Trainer {
             return convertBufferToType<T>(buffer);
         }
 
-        public void writeToProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, T value) {
+        public static void writeToProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, T value) {
             byte[] buffer = convertValueToBuffer(value);
 
             bool writeSuccess = Win32.WriteProcessMemory(processHandle.handle, memoryAddress.address, buffer, buffer.Length, out IntPtr bytesWritten);
@@ -65,7 +53,7 @@ namespace TrainerCommon.Trainer {
             };
         }
 
-        public IntPtr? getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
+        public static IntPtr? getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
             return moduleName == null ? processHandle.process.MainModule?.BaseAddress : Win32.getModuleBaseAddress(new IntPtr(processHandle.process.Id), moduleName);
         }
 

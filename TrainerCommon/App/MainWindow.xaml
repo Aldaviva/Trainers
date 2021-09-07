@@ -3,13 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:trainerCommon="clr-namespace:TrainerCommon"
         xmlns:app="clr-namespace:TrainerCommon.App"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=trainerCommon:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=app:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="{Binding windowTitle}"
-        Height="Auto" 
-        Width="275" 
+        Height="Auto"
+        Width="275"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         SizeToContent="Height">
@@ -29,65 +28,30 @@
 
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" BorderBrush="#FFD7D7D7" BorderThickness="0,1,0,0" Padding="1, 0">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <!--<ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />-->
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="0">
+            <StatusBarItem>
                 <TextBlock Style="{StaticResource statusBarTextBlock}" Text="{Binding statusBarAttachmentMessage.Value}" />
             </StatusBarItem>
-            <!-- <Separator Grid.Column="1" Background="#FFD7D7D7" />
-            <StatusBarItem Grid.Column="2" HorizontalContentAlignment="Right">
-                <TextBlock Style="{StaticResource statusBarTextBlock}" Text="{Binding statusBarVersionText}" />
-            </StatusBarItem>-->
         </StatusBar>
 
-        <ListBox Margin="10,10,10,4" ItemsSource="{Binding game.cheats}" HorizontalContentAlignment="Stretch" BorderThickness="0">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <!-- Disable selection and mouseover highlighting: https://stackoverflow.com/a/8894199/979493 -->
-                    <Setter Property="Focusable" Value="False" />
-                    <Setter Property="IsHitTestVisible" Value="False" />
-                    <Setter Property="Padding" Value="0,0,0,5" />
-                </Style>
-            </ListBox.ItemContainerStyle>
-
-            <ListBox.ItemTemplate>
+        <ItemsControl Margin="10,10,10,5" ItemsSource="{Binding game.cheats}" HorizontalContentAlignment="Stretch" BorderThickness="0">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel>
-                        <CheckBox IsChecked="{Binding isEnabled.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" Margin="0,0,4,0" VerticalAlignment="Bottom" />
-
-                        <Label Content="{Binding keyboardShortcut, Converter={StaticResource combinationConverter}}" Padding="0" DockPanel.Dock="Right">
-                            <Label.Foreground>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
-                            </Label.Foreground>
-                        </Label>
-
-                        <Label Content="{Binding name}" Padding="0" />
-                    </DockPanel>
+                    <!-- If the window has a 1px black line at the bottom, try setting UseLayoutRounding="True" on the CheckBox -->
+                    <CheckBox IsChecked="{Binding isEnabled.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,4,5" HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch" Height="16">
+                        <CheckBox.Content>
+                            <DockPanel VerticalAlignment="Bottom">
+                                <Label Content="{Binding keyboardShortcut, Converter={StaticResource combinationConverter}}" Padding="0" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                    <Label.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+                                    </Label.Foreground>
+                                </Label>
+                                <Label Content="{Binding name}" Padding="0" DockPanel.Dock="Left" />
+                            </DockPanel>
+                        </CheckBox.Content>
+                    </CheckBox>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <!--<Grid Margin="10,10,10,9" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <CheckBox x:Name="infiniteHealthCheckbox" Content="Infinite health" VerticalAlignment="Top" Checked="onInfiniteHealthChecked" IsChecked="{Binding isInfiniteHealthEnabled.Value, Mode=OneWay}" Height="15" />
-            <Label Grid.Column="1" Padding="0" Margin="0,-1,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="16" Width="58">
-                <Label.Foreground>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
-                </Label.Foreground> Ctrl+Alt+H</Label>
-        </Grid>-->
-
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DockPanel>
 </Window>

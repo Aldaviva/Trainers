@@ -14,7 +14,7 @@ namespace TrainerCommon.Trainer {
 
     public interface TrainerService: IDisposable {
 
-        Property<bool> isAttachedToGame { get; }
+        Property<AttachmentState> isAttachedToGame { get; }
 
         void attachToGame(Game game);
 
@@ -23,14 +23,13 @@ namespace TrainerCommon.Trainer {
     public class TrainerServiceImpl: TrainerService {
 
         private readonly StoredProperty<AttachmentState> attachmentState = new();
-        public Property<bool> isAttachedToGame { get; }
+        public Property<AttachmentState> isAttachedToGame { get; }
 
-        private readonly MemoryEditor            memoryEditor            = new MemoryEditorImpl();
         private readonly CancellationTokenSource cancellationTokenSource = new();
         private          Task?                   monitorTask;
 
         public TrainerServiceImpl() {
-            isAttachedToGame = DerivedProperty<bool>.Create(attachmentState, state => state == AttachmentState.ATTACHED);
+            isAttachedToGame = attachmentState;
 
             attachmentState.PropertyChanged += (_, args) => Trace.WriteLine($"Trainer state: {args.NewValue}");
         }
@@ -47,7 +46,7 @@ namespace TrainerCommon.Trainer {
                 while (!cancellationTokenSource.IsCancellationRequested) {
                     await Task.Delay(attachmentState.Value switch {
                         AttachmentState.TRAINER_STOPPED                  => 0,
-                        AttachmentState.ATTACHED                         => 250,
+                        AttachmentState.ATTACHED                         => 200,
                         AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => 2000,
                         AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => 2000,
                         AttachmentState.PROGRAM_NOT_RUNNING              => 10000,
@@ -64,7 +63,7 @@ namespace TrainerCommon.Trainer {
                         continue;
                     }
 
-                    gameProcessHandle ??= memoryEditor.openProcess(gameProcess);
+                    gameProcessHandle ??= MemoryEditor.openProcess(gameProcess);
                     if (gameProcessHandle == null) {
                         attachmentState.Value = AttachmentState.PROGRAM_NOT_RUNNING;
                         continue;
@@ -72,7 +71,7 @@ namespace TrainerCommon.Trainer {
 
                     try {
                         foreach (Cheat cheat in game.cheats) {
-                            cheat.applyIfNecessary(gameProcessHandle, memoryEditor);
+                            cheat.applyIfNecessary(gameProcessHandle);
                         }
 
                         attachmentState.Value = AttachmentState.ATTACHED;
@@ -85,6 +84,9 @@ namespace TrainerCommon.Trainer {
                         if (e.NativeErrorCode != 299) {
                             Console.WriteLine(e);
                         }
+
+                        Trace.WriteLine("Memory address could not be read");
+                        Trace.WriteLine(e);
                     }
                 }
 
@@ -96,19 +98,24 @@ namespace TrainerCommon.Trainer {
 
         public void Dispose() {
             cancellationTokenSource.Cancel();
-            monitorTask?.GetAwaiter().GetResult();
+            try {
+                monitorTask?.GetAwaiter().GetResult();
+            } catch (TaskCanceledException) {
+                //cancellation is how this task normally ends
+            }
+
             attachmentState.Value = AttachmentState.TRAINER_STOPPED;
         }
 
-        private enum AttachmentState {
+    }
 
-            TRAINER_STOPPED,
-            PROGRAM_NOT_RUNNING,
-            MEMORY_ADDRESS_NOT_FOUND,
-            MEMORY_ADDRESS_COULD_NOT_BE_READ,
-            ATTACHED
+    public enum AttachmentState {
 
-        }
+        TRAINER_STOPPED,
+        PROGRAM_NOT_RUNNING,
+        MEMORY_ADDRESS_NOT_FOUND,
+        MEMORY_ADDRESS_COULD_NOT_BE_READ,
+        ATTACHED
 
     }
 

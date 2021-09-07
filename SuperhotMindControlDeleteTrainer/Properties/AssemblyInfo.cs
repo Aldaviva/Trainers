@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
-[assembly: AssemblyDescription("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
+[assembly: AssemblyTitle("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
+[assembly: AssemblyDescription("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
-[assembly: AssemblyProduct("Superhot: Mind Control Delete 1.0.0 +1 Trainer")]
+[assembly: AssemblyProduct("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
 [assembly: AssemblyCopyright("© 2021 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -47,5 +47,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]

@@ -19,18 +19,16 @@ namespace SuperhotMindControlDeleteTrainer.Cheats {
 
         public override Combination keyboardShortcut { get; } = Combination.TriggeredBy(Keys.H).Alt().Control();
 
-        public override void applyIfNecessary(ProcessHandle processHandle, MemoryEditor memoryEditor) {
-            if (!isEnabled.Value) return;
-
-            FixedMemoryAddress    currentHeartsAddress = new(new IndirectMemoryAddress(processHandle, MODULE_NAME, CURRENT_HEARTS_OFFSETS).address);
+        protected override void apply(ProcessHandle processHandle) {
+            FixedMemoryAddress    currentHeartsAddress = new(new IndirectMemoryAddress(processHandle, MODULE_NAME, CURRENT_HEARTS_OFFSETS).address); //used twice, so don't reevaluate address
             IndirectMemoryAddress maxHeartsAddress     = new(processHandle, MODULE_NAME, MAX_HEARTS_OFFSETS);
 
-            int currentHearts = memoryEditor.readFromProcessMemory<int>(processHandle, currentHeartsAddress);
-            int maxHearts     = memoryEditor.readFromProcessMemory<int>(processHandle, maxHeartsAddress);
+            int currentHearts = MemoryEditor.readFromProcessMemory<int>(processHandle, currentHeartsAddress);
+            int maxHearts     = MemoryEditor.readFromProcessMemory<int>(processHandle, maxHeartsAddress);
 
             if (currentHearts < maxHearts) {
                 Trace.WriteLine($"Setting health to {maxHearts:N0}...");
-                memoryEditor.writeToProcessMemory(processHandle, currentHeartsAddress, maxHearts);
+                MemoryEditor.writeToProcessMemory(processHandle, currentHeartsAddress, maxHearts);
             }
         }
 
