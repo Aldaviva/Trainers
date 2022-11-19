@@ -20,7 +20,7 @@ jobs:
       run: msbuild -t:restore -p:RestoreLockedMode=true
 
     - name: Build
-      run: msbuild -t:build -p:Configuration=Release
+      run: msbuild -t:build -p:Configuration=Release -m
 
     - name: Move artifacts
       run: |
