@@ -1,14 +1,12 @@
-﻿using SuperhotMindControlDeleteTrainer.Games;
+﻿#nullable enable
+
+using SuperhotMindControlDeleteTrainer.Games;
 using TrainerCommon.Games;
 
-#nullable enable
+namespace SuperhotMindControlDeleteTrainer.App; 
 
-namespace SuperhotMindControlDeleteTrainer.App {
+public partial class App {
 
-    public partial class App {
-
-        protected override Game game { get; } = new SuperhotMindControlDelete();
-
-    }
+    protected override Game game { get; } = new SuperhotMindControlDelete();
 
 }

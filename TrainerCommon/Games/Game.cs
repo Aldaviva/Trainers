@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+
+using System.Collections.Generic;
 using TrainerCommon.Cheats;
 
-#nullable enable
+namespace TrainerCommon.Games; 
 
-namespace TrainerCommon.Games {
+public interface Game {
 
-    public interface Game {
+    string name { get; }
+    string processName { get; }
+    string supportedVersion { get; }
 
-        string name { get; }
-        string processName { get; }
-        string supportedVersion { get; }
-
-        IList<Cheat> cheats { get; }
-
-    }
+    IList<Cheat> cheats { get; }
 
 }

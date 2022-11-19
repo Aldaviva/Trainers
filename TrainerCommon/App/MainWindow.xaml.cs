@@ -1,26 +1,21 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using TrainerCommon.Trainer;
 
-#nullable enable
+namespace TrainerCommon.App;
 
-namespace TrainerCommon.App {
+public partial class MainWindow {
 
-    public partial class MainWindow {
+    public MainWindow(MainWindowViewModel viewModel) {
+        DataContext = viewModel;
 
-        private readonly MainWindowViewModel viewModel;
+        InitializeComponent();
+    }
 
-        public MainWindow(MainWindowViewModel viewModel) {
-            this.viewModel = viewModel;
-            DataContext    = viewModel;
-
-            InitializeComponent();
-        }
-
-        protected override void OnSourceInitialized(EventArgs e) {
-            base.OnSourceInitialized(e);
-            Win32.hideMinimizeAndMaximizeButtons(this);
-        }
-
+    protected override void OnSourceInitialized(EventArgs e) {
+        base.OnSourceInitialized(e);
+        Win32.hideMinimizeAndMaximizeButtons(this);
     }
 
 }

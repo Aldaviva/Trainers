@@ -8,7 +8,7 @@
         d:DataContext="{d:DesignInstance Type=app:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="{Binding windowTitle}"
         Height="Auto"
-        Width="275"
+        Width="300"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         SizeToContent="Height">

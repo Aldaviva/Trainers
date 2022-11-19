@@ -1,14 +1,12 @@
-﻿using Dakar18Trainer.Games;
+﻿#nullable enable
+
+using Dakar18Trainer.Games;
 using TrainerCommon.Games;
 
-#nullable enable
+namespace Dakar18Trainer.App; 
 
-namespace Dakar18Trainer.App {
+public partial class App {
 
-    public partial class App {
-
-        protected override Game game { get; } = new Dakar18();
-
-    }
+    protected override Game game { get; } = new Dakar18();
 
 }
