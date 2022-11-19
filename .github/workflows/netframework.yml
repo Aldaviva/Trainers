@@ -1,0 +1,35 @@
+name: .NET Framework
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Find MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Clone
+      uses: actions/checkout@v3
+
+    - name: Restore
+      run: msbuild -t:restore -p:RestoreLockedMode=true
+
+    - name: Build
+      run: msbuild -t:build -p:Configuration=Release
+
+    - name: Move artifacts
+      run: |
+        New-Item upload -ItemType Directory -Force
+        Copy-Item -Destination .\upload\ *\bin\Release\*.exe
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Trainers
+        path: upload
+        if-no-files-found: error

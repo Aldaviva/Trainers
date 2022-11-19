@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.7.2": {
+      "ILRepack.Lib.MSBuild.Task": {
+        "type": "Direct",
+        "requested": "[2.0.18.2, )",
+        "resolved": "2.0.18.2",
+        "contentHash": "lreK19MMDA/ekeqjLY4w171cG7+pHwjeTMHMNq6tghuhTOIOfHT+b/LTMj5jpfbJoR7J6AMD3yOYZoyY/2wtJA=="
+      },
+      "KoKo": {
+        "type": "Transitive",
+        "resolved": "2.2.0",
+        "contentHash": "8sgJYZINKgsuRYlvuuiXw+3GmheMd7XZO11ve9czTrHwd0rVIRSY0kLPQOkT3kxwILhEkNFXEK44pJy9hDF9Ww=="
+      },
+      "MouseKeyHook": {
+        "type": "Transitive",
+        "resolved": "5.6.0",
+        "contentHash": "xDNM10IfRED0+k78O9VvY0/suqeNJVg6GttEFPP/N4CEMujwVrfU+UatFN7Rb+gdjqIfhKblz7/nG3pUQmHaJg=="
+      },
+      "trainercommon": {
+        "type": "Project",
+        "dependencies": {
+          "KoKo": "[2.2.0, )",
+          "MouseKeyHook": "[5.6.0, )"
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win": {},
+    ".NETFramework,Version=v4.7.2/win-x64": {},
+    ".NETFramework,Version=v4.7.2/win-x86": {}
+  }
+}

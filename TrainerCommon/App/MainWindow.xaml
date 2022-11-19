@@ -33,7 +33,7 @@
             </StatusBarItem>
         </StatusBar>
 
-        <ItemsControl Margin="10,10,10,5" ItemsSource="{Binding game.cheats}" HorizontalContentAlignment="Stretch" BorderThickness="0">
+        <ItemsControl Margin="10,10,10,5" ItemsSource="{Binding game.cheats}" HorizontalContentAlignment="Stretch" BorderThickness="0" Focusable="False">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <!-- If the window has a 1px black line at the bottom, try setting UseLayoutRounding="True" on the CheckBox -->
