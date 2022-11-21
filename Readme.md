@@ -20,10 +20,10 @@ Trainers
 
 ![trainer screenshot](https://i.imgur.com/ZMcCTAs.png)
 
-[💾 Download](https://github.com/Aldaviva/Trainers/releases/download/1.0.1/Dakar18Trainer.exe)
+[💾 Download](https://github.com/Aldaviva/Trainers/releases/download/1.0.2/Dakar18Trainer.exe)
 
 - No speed limit
-    - All speed limit warnings and penalties are removed in all difficulty levels.
+    - Warnings and penalties for exceeding the speed limit are removed in all difficulty levels.
     - You are still automatically limited to 30 km/h in passage control auto-driving zones.
 
 *Supports Dakar 18 v.13, released in March 2019, which contains Desafio Ruta 40 Rally and Inca Rally*
@@ -36,9 +36,9 @@ Trainers
 [💾 Download](https://github.com/Aldaviva/Trainers/releases/download/1.0.2/DakarDesertRallyTrainer.exe)
 
 - No speed limit
-    - Yellow and red speed limit warnings and all penalties are removed in all difficulty levels.
-    - The gray speed limit warning is still visible in Simulation Mode and areas with speed limits like villages and passage control.
-    - Hilariously, you are *not* limited to 30 km/h in passage control auto-driving zones.
+    - Yellow and red warnings and penalties for exceeding the speed limit are removed in all difficulty levels.
+    - The gray speed limit warning is still visible in Simulation Mode, as well as in areas with speed limits like villages and passage control auto-driving zones, so just ignore it.
+    - Hilariously, you will experience unavoidable full-throttle acceleration in passage control zones, so be careful if there are vehicles waiting in front of you.
 
 *Supports Dakar Desert Rally 1.5.0, released on November 15, 2022, which has build number 9902125*
 
@@ -47,7 +47,7 @@ Trainers
 
 ![trainer screenshot](https://i.imgur.com/yH0Msy6.png)
 
-[💾 Download](https://github.com/Aldaviva/Trainers/releases/download/1.0.1/SuperhotMindControlDeleteTrainer.exe)
+[💾 Download](https://github.com/Aldaviva/Trainers/releases/download/1.0.2/SuperhotMindControlDeleteTrainer.exe)
 
 - Infinite health
 
