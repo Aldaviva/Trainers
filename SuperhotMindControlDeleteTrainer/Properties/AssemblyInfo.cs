@@ -7,7 +7,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
 [assembly: AssemblyProduct("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
-[assembly: AssemblyCopyright("© 2022 Ben Hutchison")]
+[assembly: AssemblyCopyright("© 2023 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

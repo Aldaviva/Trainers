@@ -9,8 +9,8 @@ namespace DakarDesertRallyTrainer.Cheats;
 
 public class NoSpeedLimitCheat: BaseCheat {
 
-    private static readonly int[] SPEED_LIMIT_OFFSETS = { 0x57C3550, 0x10, 0xF0, 0x30C };
-    private static readonly int[] BANNER_OFFSETS      = { 0x5C62C80, 0x30, 0x2B0, 0x408, 0x658, 0x364 };
+    private static readonly int[] SPEED_LIMIT_OFFSETS = { 0x555A7B0, 0x10, 0xF0, 0x30C };
+    private static readonly int[] BANNER_OFFSETS      = { 0x5AF6638, 0x3B0, 0x10, 0x7F0, 0x658, 0x364 };
 
     public override string name { get; } = "No speed limit";
 

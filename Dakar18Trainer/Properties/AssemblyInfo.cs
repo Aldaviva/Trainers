@@ -7,7 +7,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
 [assembly: AssemblyProduct("Dakar 18 v.13 +1 Trainer by Ben")]
-[assembly: AssemblyCopyright("© 2022 Ben Hutchison")]
+[assembly: AssemblyCopyright("© 2023 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

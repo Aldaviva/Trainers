@@ -11,7 +11,7 @@ public class DakarDesertRally: Game {
 
     public string name { get; } = "Dakar Desert Rally";
     public string processName { get; } = "Dakar2Game-Win64-Shipping";
-    public string supportedVersion { get; } = "1.5.0";
+    public string supportedVersion { get; } = "1.6.0";
     public IList<Cheat> cheats { get; } = new List<Cheat> { new NoSpeedLimitCheat() };
 
 }
