@@ -10,7 +10,7 @@ using KoKo.Property;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
-namespace TrainerCommon.Trainer; 
+namespace TrainerCommon.Trainer;
 
 public interface TrainerService: IDisposable {
 
@@ -46,7 +46,7 @@ public class TrainerServiceImpl: TrainerService {
             while (!cancellationTokenSource.IsCancellationRequested) {
                 await Task.Delay(attachmentState.Value switch {
                     AttachmentState.TRAINER_STOPPED                  => 0,
-                    AttachmentState.ATTACHED                         => 200,
+                    AttachmentState.ATTACHED                         => 100, // same as Cheat Engine's default Freeze Interval (General Settings)
                     AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => 2000,
                     AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => 2000,
                     AttachmentState.PROGRAM_NOT_RUNNING              => 10000,

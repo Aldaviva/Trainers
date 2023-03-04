@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
 
-namespace TrainerCommon.App; 
+namespace TrainerCommon.App;
 
 public class CombinationConverter: IValueConverter {
 
@@ -28,7 +28,7 @@ public class CombinationConverter: IValueConverter {
                 });
             return string.Join("+", modifiers.Append(combination.TriggerKey.ToString()));
         } else {
-            throw new ArgumentException($"value {value} is not an instance of Combination", nameof(value));
+            return value;
         }
     }
 

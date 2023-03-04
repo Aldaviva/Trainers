@@ -49,6 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Skins\SkinManager.cs" />
     <Compile Include="Cheats\Cheat.cs" />
     <Compile Include="App\CombinationConverter.cs" />
     <Compile Include="App\CommonApp.cs" />
@@ -64,6 +65,9 @@
     <Compile Include="Trainer\Win32.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DarkNet">
+      <Version>2.2.0-SNAPSHOT1</Version>
+    </PackageReference>
     <PackageReference Include="KoKo">
       <Version>2.2.0</Version>
     </PackageReference>
@@ -72,6 +76,18 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="App\Skins\Skin.Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Skins\Skin.Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="App\Skins\Skin.Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="App\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

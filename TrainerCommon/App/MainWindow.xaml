@@ -11,25 +11,16 @@
         Width="300"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        SizeToContent="Height">
+        SizeToContent="Height"
+        Style="{DynamicResource windowStyle}">
     <Window.Resources>
-        <Style TargetType="StatusBarItem">
-            <Style.Setters>
-                <Setter Property="Padding" Value="5, 2, 5, 3" />
-            </Style.Setters>
-        </Style>
-        <Style x:Key="statusBarTextBlock">
-            <Style.Setters>
-                <Setter Property="TextBlock.Padding" Value="0" />
-            </Style.Setters>
-        </Style>
         <app:CombinationConverter x:Key="combinationConverter" />
     </Window.Resources>
 
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom" BorderBrush="#FFD7D7D7" BorderThickness="0,1,0,0" Padding="1, 0">
+        <StatusBar DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" Padding="1, 0">
             <StatusBarItem>
-                <TextBlock Style="{StaticResource statusBarTextBlock}" Text="{Binding statusBarAttachmentMessage.Value}" />
+                <TextBlock Style="{DynamicResource statusBarText}" Text="{Binding statusBarAttachmentMessage.Value}" />
             </StatusBarItem>
         </StatusBar>
 

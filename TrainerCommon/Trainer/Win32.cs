@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace TrainerCommon.Trainer; 
+namespace TrainerCommon.Trainer;
 
 public static class Win32 {
 
@@ -50,14 +50,14 @@ public static class Win32 {
     [Flags]
     private enum SnapshotFlags: uint {
 
-        // HEAP_LIST = 0x00000001,
-        // PROCESS   = 0x00000002,
-        // THREAD    = 0x00000004,
-        MODULE   = 0x00000008,
-        MODULE32 = 0x00000010,
-        // INHERIT   = 0x80000000,
-        // ALL       = 0x0000001F,
-        // NO_HEAPS  = 0x40000000
+        HEAP_LIST = 0x00000001,
+        PROCESS   = 0x00000002,
+        THREAD    = 0x00000004,
+        MODULE    = 0x00000008,
+        MODULE32  = 0x00000010,
+        ALL       = 0x0000001F,
+        NO_HEAPS  = 0x40000000,
+        INHERIT   = 0x80000000
 
     }
 
@@ -99,7 +99,7 @@ public static class Win32 {
 
             if (Module32First(hSnap, ref modEntry)) {
                 do {
-                    if (modEntry.name.Equals(modName)) {
+                    if (modEntry.name.Equals(modName, StringComparison.InvariantCultureIgnoreCase)) {
                         baseAddress = modEntry.baseAddress;
                         break;
                     }

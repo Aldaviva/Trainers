@@ -8,6 +8,11 @@
         "resolved": "2.0.18.2",
         "contentHash": "lreK19MMDA/ekeqjLY4w171cG7+pHwjeTMHMNq6tghuhTOIOfHT+b/LTMj5jpfbJoR7J6AMD3yOYZoyY/2wtJA=="
       },
+      "DarkNet": {
+        "type": "Transitive",
+        "resolved": "2.2.0-SNAPSHOT1",
+        "contentHash": "X9712/N1QPcM77vubNm/DzuZnxctUSigAg3VYJMSWt1/BMEeKTG6B4aqj8eMAjdHunKIff14SKcm+oa/jbcDBw=="
+      },
       "KoKo": {
         "type": "Transitive",
         "resolved": "2.2.0",
@@ -21,6 +26,7 @@
       "trainercommon": {
         "type": "Project",
         "dependencies": {
+          "DarkNet": "[2.2.0-SNAPSHOT1, )",
           "KoKo": "[2.2.0, )",
           "MouseKeyHook": "[5.6.0, )"
         }

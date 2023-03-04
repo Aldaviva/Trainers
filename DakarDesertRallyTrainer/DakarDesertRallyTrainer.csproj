@@ -88,6 +88,5 @@
   <ItemGroup>
     <Resource Include="App\dakar icon.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
