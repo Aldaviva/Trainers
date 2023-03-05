@@ -10,14 +10,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Find MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Clone
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3.3.0
 
     - name: Restore
-      run: msbuild -t:restore -p:RestoreLockedMode=true
+      run: msbuild -t:restore -p:RestoreLockedMode=true -m
 
     - name: Build
       run: msbuild -t:build -p:Configuration=Release -m
@@ -28,7 +28,7 @@ jobs:
         Copy-Item -Destination .\upload\ *\bin\Release\*.exe
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: Trainers
         path: upload

@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace TrainerCommon.Trainer; 
+namespace TrainerCommon.Trainer;
 
 public interface MemoryAddress {
 
@@ -42,10 +42,9 @@ public readonly struct IndirectMemoryAddress: MemoryAddress {
              * Is the game 32-bit or 64-bit?
              * Note that the trainer must be compiled as 64-bit in order to read memory from 64-bit games.
              */
-            int targetProcessWordLengthBytes = Win32.isProcess64Bit(processHandle.process) ? Marshal.SizeOf<long>() : Marshal.SizeOf<int>();
+            int targetProcessWordLengthBytes = processHandle.is64Bit ? 8 : 4;
 
-            IntPtr memoryAddress = MemoryEditor.getModuleBaseAddressByName(processHandle, moduleName) ??
-                throw new ArgumentException($"No module with name {moduleName} found in process {processHandle.process.ProcessName}");
+            IntPtr memoryAddress = MemoryEditor.getModuleBaseAddressByName(processHandle, moduleName);
 
             for (int offsetIndex = 0; offsetIndex < pointerOffsets.Length; offsetIndex++) {
                 int offset = pointerOffsets[offsetIndex];

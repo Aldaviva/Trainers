@@ -3,7 +3,9 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using KoKo.Property;
@@ -14,7 +16,7 @@ namespace TrainerCommon.Trainer;
 
 public interface TrainerService: IDisposable {
 
-    Property<AttachmentState> isAttachedToGame { get; }
+    Property<AttachmentState> attachmentState { get; }
 
     void attachToGame(Game game);
 
@@ -22,16 +24,16 @@ public interface TrainerService: IDisposable {
 
 public class TrainerServiceImpl: TrainerService {
 
-    private readonly StoredProperty<AttachmentState> attachmentState = new();
-    public Property<AttachmentState> isAttachedToGame { get; }
+    private readonly StoredProperty<AttachmentState> _attachmentState = new();
+    public Property<AttachmentState> attachmentState { get; }
 
     private readonly CancellationTokenSource cancellationTokenSource = new();
-    private          Task?                   monitorTask;
+
+    private Task? monitorTask;
 
     public TrainerServiceImpl() {
-        isAttachedToGame = attachmentState;
-
-        attachmentState.PropertyChanged += (_, args) => Trace.WriteLine($"Trainer state: {args.NewValue}");
+        attachmentState                  =  _attachmentState;
+        _attachmentState.PropertyChanged += (_, args) => Trace.WriteLine($"Trainer state: {args.NewValue}");
     }
 
     public void attachToGame(Game game) {
@@ -39,48 +41,65 @@ public class TrainerServiceImpl: TrainerService {
             throw new ApplicationException("Cannot attach the same TrainerServiceImpl instance to a game more than once.");
         }
 
-        monitorTask = Task.Run(async () => {
-            Process?       gameProcess       = null;
-            ProcessHandle? gameProcessHandle = null;
+        monitorTask = Task.Factory.StartNew(async () => {
+            Process?       gameProcess        = null;
+            ProcessHandle? gameProcessHandle  = null;
+            string?        gameExecutableHash = null;
+            string?        gameVersionCode    = null;
 
             while (!cancellationTokenSource.IsCancellationRequested) {
-                await Task.Delay(attachmentState.Value switch {
+                await Task.Delay(_attachmentState.Value switch {
                     AttachmentState.TRAINER_STOPPED                  => 0,
                     AttachmentState.ATTACHED                         => 100, // same as Cheat Engine's default Freeze Interval (General Settings)
-                    AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => 2000,
-                    AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => 2000,
-                    AttachmentState.PROGRAM_NOT_RUNNING              => 10000,
+                    AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => 1000,
+                    AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => 1000,
+                    AttachmentState.PROGRAM_NOT_RUNNING              => 3000,
+                    AttachmentState.UNSUPPORTED_PROGRAM_VERSION      => 10000,
                     _                                                => throw new ArgumentOutOfRangeException()
                 }, cancellationTokenSource.Token);
 
                 gameProcess ??= Process.GetProcessesByName(game.processName).FirstOrDefault();
                 if (gameProcess == null || gameProcess.HasExited) {
-                    attachmentState.Value = AttachmentState.PROGRAM_NOT_RUNNING;
-                    gameProcess?.Dispose();
-                    gameProcess = null;
-                    gameProcessHandle?.Dispose();
-                    gameProcessHandle = null;
+                    cleanUpGameProcess();
                     continue;
                 }
 
                 gameProcessHandle ??= MemoryEditor.openProcess(gameProcess);
                 if (gameProcessHandle == null) {
-                    attachmentState.Value = AttachmentState.PROGRAM_NOT_RUNNING;
+                    cleanUpGameProcess();
+                    continue;
+                }
+
+                if (gameExecutableHash == null) {
+                    try {
+                        gameExecutableHash = readFileHash(gameProcess.MainModule!.FileName);
+                    } catch (InvalidOperationException) {
+                        cleanUpGameProcess();
+                        continue;
+                    }
+
+                    gameVersionCode = game.getVersion(gameExecutableHash);
+                    if (gameVersionCode == null) {
+                        _attachmentState.Value = AttachmentState.UNSUPPORTED_PROGRAM_VERSION;
+                    }
+                }
+
+                if (_attachmentState.Value == AttachmentState.UNSUPPORTED_PROGRAM_VERSION) {
                     continue;
                 }
 
                 try {
                     foreach (Cheat cheat in game.cheats) {
-                        cheat.applyIfNecessary(gameProcessHandle);
+                        cheat.applyIfNecessary(gameProcessHandle, gameVersionCode!);
                     }
 
-                    attachmentState.Value = AttachmentState.ATTACHED;
+                    _attachmentState.Value = AttachmentState.ATTACHED;
                 } catch (ApplicationException e) {
                     Trace.WriteLine("ApplicationException: " + e);
-                    attachmentState.Value = AttachmentState.MEMORY_ADDRESS_NOT_FOUND;
+                    _attachmentState.Value = AttachmentState.MEMORY_ADDRESS_NOT_FOUND;
                 } catch (Win32Exception e) {
                     Trace.WriteLine($"Win32Exception: (NativeErrorCode = {e.NativeErrorCode}) " + e);
-                    attachmentState.Value = AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ;
+                    _attachmentState.Value = AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ;
                     if (e.NativeErrorCode != 299) {
                         Console.WriteLine(e);
                     }
@@ -93,7 +112,22 @@ public class TrainerServiceImpl: TrainerService {
             gameProcess?.Dispose();
             gameProcessHandle?.Dispose();
 
-        }, cancellationTokenSource.Token);
+            void cleanUpGameProcess() {
+                _attachmentState.Value = AttachmentState.PROGRAM_NOT_RUNNING;
+                gameProcess?.Dispose();
+                gameProcess = null;
+                gameProcessHandle?.Dispose();
+                gameProcessHandle  = null;
+                gameExecutableHash = null;
+                gameVersionCode    = null;
+            }
+        }, cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
+    }
+
+    private static string readFileHash(string filename) {
+        using FileStream fileStream = File.OpenRead(filename);
+        using SHA256     sha256     = SHA256.Create();
+        return string.Join(string.Empty, sha256.ComputeHash(fileStream).Select(b => b.ToString("x2")));
     }
 
     public void Dispose() {
@@ -104,17 +138,7 @@ public class TrainerServiceImpl: TrainerService {
             //cancellation is how this task normally ends
         }
 
-        attachmentState.Value = AttachmentState.TRAINER_STOPPED;
+        _attachmentState.Value = AttachmentState.TRAINER_STOPPED;
     }
-
-}
-
-public enum AttachmentState {
-
-    TRAINER_STOPPED,
-    PROGRAM_NOT_RUNNING,
-    MEMORY_ADDRESS_NOT_FOUND,
-    MEMORY_ADDRESS_COULD_NOT_BE_READ,
-    ATTACHED
 
 }

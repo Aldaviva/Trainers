@@ -1,12 +1,13 @@
 ﻿#nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace TrainerCommon.Trainer; 
+namespace TrainerCommon.Trainer;
 
 public static class MemoryEditor {
 
@@ -16,13 +17,13 @@ public static class MemoryEditor {
             Win32.ProcessAccessFlags.VIRTUAL_MEMORY_WRITE |
             Win32.ProcessAccessFlags.VIRTUAL_MEMORY_OPERATION,
             false, targetProcess.Id);
-        return handle != IntPtr.Zero ? new ProcessHandle(targetProcess, handle) : null;
+        return handle != IntPtr.Zero ? new ProcessHandle(targetProcess, handle, Win32.isProcess64Bit(targetProcess)) : null;
     }
 
     public static T readFromProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, int? bytesToRead = null) {
         bytesToRead ??= Marshal.SizeOf<T>();
 
-        byte[] buffer = new byte[(int) bytesToRead];
+        byte[] buffer = new byte[bytesToRead.Value];
 
         bool readSuccess = Win32.ReadProcessMemory(processHandle.handle, memoryAddress.address, buffer, buffer.Length, out long bytesRead);
 
@@ -53,8 +54,18 @@ public static class MemoryEditor {
         };
     }
 
-    public static IntPtr? getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
-        return moduleName == null ? processHandle.process.MainModule?.BaseAddress : Win32.getModuleBaseAddress(new IntPtr(processHandle.process.Id), moduleName);
+    public static IntPtr getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
+        string cacheKey = moduleName ?? string.Empty;
+
+        if (!processHandle.moduleBaseAddressCache.TryGetValue(cacheKey, out IntPtr result)) {
+            result = moduleName == null
+                ? processHandle.process.MainModule!.BaseAddress
+                : Win32.getModuleBaseAddress(new IntPtr(processHandle.process.Id), moduleName);
+
+            processHandle.moduleBaseAddressCache[cacheKey] = result;
+        }
+
+        return result;
     }
 
     private static T convertBufferToType<T>(byte[] buffer) {
@@ -71,10 +82,13 @@ public class ProcessHandle: IDisposable {
 
     public Process process { get; }
     public IntPtr handle { get; }
+    public bool is64Bit { get; }
+    public IDictionary<string, IntPtr> moduleBaseAddressCache { get; } = new Dictionary<string, IntPtr>();
 
-    internal ProcessHandle(Process process, IntPtr handle) {
+    internal ProcessHandle(Process process, IntPtr handle, bool is64Bit) {
         this.process = process;
         this.handle  = handle;
+        this.is64Bit = is64Bit;
     }
 
     private void dispose(bool disposing) {

@@ -49,6 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\SampleMainWindowViewModel.cs" />
     <Compile Include="App\Skins\SkinManager.cs" />
     <Compile Include="Cheats\Cheat.cs" />
     <Compile Include="App\CombinationConverter.cs" />
@@ -58,6 +59,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App\MainWindowViewModel.cs" />
+    <Compile Include="Trainer\AttachmentState.cs" />
     <Compile Include="Trainer\MemoryAddresses.cs" />
     <Compile Include="Trainer\MemoryEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

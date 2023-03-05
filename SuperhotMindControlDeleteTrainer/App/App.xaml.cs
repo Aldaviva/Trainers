@@ -3,7 +3,7 @@
 using SuperhotMindControlDeleteTrainer.Games;
 using TrainerCommon.Games;
 
-namespace SuperhotMindControlDeleteTrainer.App; 
+namespace SuperhotMindControlDeleteTrainer.App;
 
 public partial class App {
 

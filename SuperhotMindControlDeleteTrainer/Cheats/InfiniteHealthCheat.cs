@@ -6,7 +6,7 @@ using Gma.System.MouseKeyHook;
 using TrainerCommon.Cheats;
 using TrainerCommon.Trainer;
 
-namespace SuperhotMindControlDeleteTrainer.Cheats; 
+namespace SuperhotMindControlDeleteTrainer.Cheats;
 
 public class InfiniteHealthCheat: BaseCheat {
 
@@ -19,7 +19,7 @@ public class InfiniteHealthCheat: BaseCheat {
 
     public override Combination keyboardShortcut { get; } = Combination.TriggeredBy(Keys.H).Alt().Control();
 
-    protected override void apply(ProcessHandle processHandle) {
+    protected override void apply(ProcessHandle processHandle, string gameVersionCode) {
         FixedMemoryAddress    currentHeartsAddress = new(new IndirectMemoryAddress(processHandle, MODULE_NAME, CURRENT_HEARTS_OFFSETS).address); //used twice, so don't reevaluate address
         IndirectMemoryAddress maxHeartsAddress     = new(processHandle, MODULE_NAME, MAX_HEARTS_OFFSETS);
 

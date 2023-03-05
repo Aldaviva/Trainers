@@ -5,13 +5,15 @@ using Dakar18Trainer.Cheats;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
-namespace Dakar18Trainer.Games; 
+namespace Dakar18Trainer.Games;
 
-public class Dakar18: Game {
+public class Dakar18: BaseGame {
 
-    public string name { get; } = "Dakar 18";
-    public string processName { get; } = "Dakar18Game-Win64-Shipping";
-    public string supportedVersion { get; } = "v.13";
-    public IList<Cheat> cheats { get; } = new List<Cheat> { new NoSpeedLimitCheat() };
+    public override string name { get; } = "Dakar 18";
+    public override string processName { get; } = "Dakar18Game-Win64-Shipping";
+    public override string supportedVersion { get; } = "v.13";
+    public override ICollection<Cheat> cheats { get; } = new List<Cheat> { new NoSpeedLimitCheat() };
+
+    public override string getVersion(string executableSha256Hash) => "v.13";
 
 }

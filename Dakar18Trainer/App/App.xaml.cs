@@ -3,7 +3,7 @@
 using Dakar18Trainer.Games;
 using TrainerCommon.Games;
 
-namespace Dakar18Trainer.App; 
+namespace Dakar18Trainer.App;
 
 public partial class App {
 
