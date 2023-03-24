@@ -11,11 +11,11 @@ Trainers
     - Automatically enables the given cheat on trainer startup, instead of you having to manually click the checkbox.
     - `CHEAT NAME` is the name of the cheat as it appears in the trainer UI, such as `No speed limit`. Case-insensitive.
     - Useful if you always want to play a game with a given cheat active, and you want to launch the game with a batch file that both starts the game and starts the trainer with this cheat enabled.
-    ```bat
-    @echo off
-    Dakar2Game.exe
-    DakarDesertRallyTrainer.exe --enable-cheat "No speed limit"
-    ```
+        ```bat
+        @echo off
+        Dakar2Game.exe
+        DakarDesertRallyTrainer.exe --enable-cheat "No speed limit"
+        ```
 
 ### Games
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" levels="1,2" style="unordered" -->
