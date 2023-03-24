@@ -42,6 +42,9 @@
   <PropertyGroup>
     <ApplicationIcon>App\dakar icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
@@ -72,6 +75,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.manifest" />
     <None Include="App\App.config" />
   </ItemGroup>
   <ItemGroup>

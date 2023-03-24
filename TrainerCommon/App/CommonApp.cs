@@ -8,7 +8,9 @@ using System.Reflection;
 using System.Windows;
 using Dark.Net;
 using Gma.System.MouseKeyHook;
+using McMaster.Extensions.CommandLineUtils;
 using TrainerCommon.App.Skins;
+using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
 
@@ -36,6 +38,31 @@ public abstract class CommonApp: Application {
         trainerService = new TrainerServiceImpl();
 
         MainWindowViewModel viewModel = new(game, trainerService);
+
+        if (e.Args.Any(arg => arg.ToLower() is "-?" or "-h" or "--help" or "/?" or "/h" or "/help")) {
+            string executableName = Path.GetFileName(Environment.GetCommandLineArgs()[0]);
+            MessageBox.Show($"""
+                {executableName}
+
+                    Trainer window is shown, and no cheats are enabled by default.
+
+                {executableName} --enable-cheat "{game.cheats.First().name}"
+
+                    Trainer window is shown, and the specified cheat is enabled automatically.
+                    You can pass --enable-cheat more than once to enable multiple cheats at startup.
+                """, "Usage", MessageBoxButton.OK, MessageBoxImage.Information);
+            Current.Shutdown(0);
+        }
+
+        try {
+            foreach (Cheat cheat in getCheatsToEnableOnStartup(e.Args)) {
+                cheat.isEnabled.Value = true;
+            }
+        } catch (ApplicationException exception) {
+            MessageBox.Show(exception.Message, viewModel.windowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            Current.Shutdown(1);
+        }
+
         MainWindow = new MainWindow(viewModel);
         DarkNet.Instance.SetWindowThemeWpf(MainWindow, Theme.Auto);
         MainWindow!.Show();
@@ -56,6 +83,22 @@ public abstract class CommonApp: Application {
         }
 
         return resourceDictionary;
+    }
+
+    private IEnumerable<Cheat> getCheatsToEnableOnStartup(string[] args) {
+        CommandLineApplication argParser = new();
+        argParser.Conventions.UseDefaultConventions();
+
+        CommandOption<string> enableCheatOption = argParser.Option<string>("--enable-cheat", "Cheat to automatically enable on startup", CommandOptionType.MultipleValue);
+
+        argParser.Parse(args);
+        return enableCheatOption.ParsedValues.Select(cheatName => {
+            try {
+                return game.cheats.First(cheat => cheat.name.Equals(cheatName, StringComparison.CurrentCultureIgnoreCase));
+            } catch (InvalidOperationException) {
+                throw new ApplicationException($"No cheat found with name \"{cheatName}\".");
+            }
+        });
     }
 
     protected override void OnExit(ExitEventArgs e) {

@@ -18,22 +18,60 @@
         "resolved": "2.2.0",
         "contentHash": "8sgJYZINKgsuRYlvuuiXw+3GmheMd7XZO11ve9czTrHwd0rVIRSY0kLPQOkT3kxwILhEkNFXEK44pJy9hDF9Ww=="
       },
+      "McMaster.Extensions.CommandLineUtils": {
+        "type": "Transitive",
+        "resolved": "4.0.2",
+        "contentHash": "/M/p9fPUfu1dtIa+/xJS3hdp4aNIVr3c0reLFP4ZKo1vZy1sXeWeyaSapoVk8dmT79OxJTpLUGDdv0ReBd8d8A==",
+        "dependencies": {
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
+          "System.ValueTuple": "4.5.0"
+        }
+      },
       "MouseKeyHook": {
         "type": "Transitive",
         "resolved": "5.6.0",
         "contentHash": "xDNM10IfRED0+k78O9VvY0/suqeNJVg6GttEFPP/N4CEMujwVrfU+UatFN7Rb+gdjqIfhKblz7/nG3pUQmHaJg=="
+      },
+      "System.Runtime.InteropServices.RuntimeInformation": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+      },
+      "System.ValueTuple": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
       },
       "trainercommon": {
         "type": "Project",
         "dependencies": {
           "DarkNet": "[2.2.0-SNAPSHOT1, )",
           "KoKo": "[2.2.0, )",
+          "McMaster.Extensions.CommandLineUtils": "[4.0.2, )",
           "MouseKeyHook": "[5.6.0, )"
         }
       }
     },
-    ".NETFramework,Version=v4.7.2/win": {},
-    ".NETFramework,Version=v4.7.2/win-x64": {},
-    ".NETFramework,Version=v4.7.2/win-x86": {}
+    ".NETFramework,Version=v4.7.2/win": {
+      "System.Runtime.InteropServices.RuntimeInformation": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x64": {
+      "System.Runtime.InteropServices.RuntimeInformation": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x86": {
+      "System.Runtime.InteropServices.RuntimeInformation": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+      }
+    }
   }
 }
