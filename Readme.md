@@ -5,6 +5,18 @@ Trainers
 ### Requirements
 - [.NET Framework 4.7.2 runtime](https://dotnet.microsoft.com/download/dotnet-framework) or later (included in Windows 10 version 1803 and later)
 
+### Arguments
+- `--enable-cheat "CHEAT NAME"`
+    - Optional, can be passed 0 or more times.
+    - Automatically enables the given cheat on trainer startup, instead of you having to manually click the checkbox.
+    - `CHEAT NAME` is the name of the cheat as it appears in the trainer UI, such as `No speed limit`. Case-insensitive.
+    - Useful if you always want to play a game with a given cheat active, and you want to launch the game with a batch file that both starts the game and starts the trainer with this cheat enabled.
+    ```bat
+    @echo off
+    Dakar2Game.exe
+    DakarDesertRallyTrainer.exe --enable-cheat "No speed limit"
+    ```
+
 ### Games
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" levels="1,2" style="unordered" -->
 
