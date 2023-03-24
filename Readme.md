@@ -13,8 +13,8 @@ Trainers
     - Useful if you always want to play a game with a given cheat active, and you want to launch the game with a batch file that both starts the game and starts the trainer with this cheat enabled.
         ```bat
         @echo off
-        Dakar2Game.exe
-        DakarDesertRallyTrainer.exe --enable-cheat "No speed limit"
+        start Dakar2Game.exe
+        start DakarDesertRallyTrainer.exe --enable-cheat "No speed limit"
         ```
 
 ### Games
