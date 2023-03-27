@@ -7,9 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Dark.Net;
+using Dark.Net.Wpf;
 using Gma.System.MouseKeyHook;
 using McMaster.Extensions.CommandLineUtils;
-using TrainerCommon.App.Skins;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
@@ -27,9 +27,9 @@ public abstract class CommonApp: Application {
         base.OnStartup(e);
 
         DarkNet.Instance.SetCurrentProcessTheme(Theme.Auto);
-        SkinManager.register(
-            getResourceDictionary("TrainerCommon", "App/Skins/Skin.Light.xaml"),
-            getResourceDictionary("TrainerCommon", "App/Skins/Skin.Dark.xaml"));
+        new SkinManager().RegisterSkins(
+            getResourceUri("TrainerCommon", "App/Skins/Skin.Light.xaml"),
+            getResourceUri("TrainerCommon", "App/Skins/Skin.Dark.xaml"));
 
         keyboardShortcuts = Hook.GlobalEvents();
         keyboardShortcuts.OnCombination(game.cheats.Select(cheat =>
@@ -70,19 +70,22 @@ public abstract class CommonApp: Application {
         trainerService.attachToGame(game);
     }
 
-    private static ResourceDictionary getResourceDictionary(string unpackedAssemblyName, string resourceDictionaryXamlPath) {
+    /// <exception cref="IOException">if the resource dictionary XAML file can't be found in the executing assembly</exception>
+    private static Uri getResourceUri(string unpackedAssemblyName, string resourceDictionaryXamlPath) {
         resourceDictionaryXamlPath = Uri.EscapeUriString(resourceDictionaryXamlPath.TrimStart('/'));
         unpackedAssemblyName       = Uri.EscapeUriString(unpackedAssemblyName);
         string executingAssembly = Uri.EscapeUriString(Assembly.GetExecutingAssembly().GetName().Name);
 
-        ResourceDictionary resourceDictionary = new();
+        Uri uri;
         try {
-            resourceDictionary.Source = new Uri($"pack://application:,,,/{executingAssembly};component/{unpackedAssemblyName}/{resourceDictionaryXamlPath}", UriKind.Absolute);
+            uri = new Uri($"pack://application:,,,/{executingAssembly};component/{unpackedAssemblyName}/{resourceDictionaryXamlPath}", UriKind.Absolute);
+            GetResourceStream(uri)?.Stream.Dispose();
+            return uri;
         } catch (IOException) {
-            resourceDictionary.Source = new Uri($"pack://application:,,,/{unpackedAssemblyName};component/{resourceDictionaryXamlPath}", UriKind.Absolute);
+            uri = new Uri($"pack://application:,,,/{unpackedAssemblyName};component/{resourceDictionaryXamlPath}", UriKind.Absolute);
+            GetResourceStream(uri)?.Stream.Dispose();
+            return uri;
         }
-
-        return resourceDictionary;
     }
 
     private IEnumerable<Cheat> getCheatsToEnableOnStartup(string[] args) {

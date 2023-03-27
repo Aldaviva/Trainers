@@ -10,8 +10,8 @@
       },
       "DarkNet": {
         "type": "Transitive",
-        "resolved": "2.2.0-SNAPSHOT1",
-        "contentHash": "X9712/N1QPcM77vubNm/DzuZnxctUSigAg3VYJMSWt1/BMEeKTG6B4aqj8eMAjdHunKIff14SKcm+oa/jbcDBw=="
+        "resolved": "2.2.0",
+        "contentHash": "OvqHbAkECmW9xPg1nWVG8l1LiX9B5FO6SikunLzwPaDMxjEPThxR8Ly0A4p6hgAfTsY5Nm3dUhAOxSLN6KnLjA=="
       },
       "KoKo": {
         "type": "Transitive",
@@ -45,7 +45,7 @@
       "trainercommon": {
         "type": "Project",
         "dependencies": {
-          "DarkNet": "[2.2.0-SNAPSHOT1, )",
+          "DarkNet": "[2.2.0, )",
           "KoKo": "[2.2.0, )",
           "McMaster.Extensions.CommandLineUtils": "[4.0.2, )",
           "MouseKeyHook": "[5.6.0, )"
