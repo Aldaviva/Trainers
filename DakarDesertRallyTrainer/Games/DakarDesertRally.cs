@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
-using System.Collections.Generic;
 using DakarDesertRallyTrainer.Cheats;
+using System.Collections.Generic;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
@@ -12,7 +12,11 @@ public class DakarDesertRally: BaseGame {
     public override string name { get; } = "Dakar Desert Rally";
     public override string processName { get; } = "Dakar2Game-Win64-Shipping";
     public override string supportedVersion { get; } = "1.5.0\u20131.9.0";
-    public override ICollection<Cheat> cheats { get; } = new List<Cheat> { new NoSpeedLimitCheat() };
+
+    public override ICollection<Cheat> cheats { get; } = new List<Cheat> {
+        new NoSpeedLimitCheat(),
+        new NoDamageCheat()
+    };
 
     public override string? getVersion(string executableSha256Hash) => executableSha256Hash switch {
         VersionSha256Hashes.V1_9_0 => Versions.V1_9_0,

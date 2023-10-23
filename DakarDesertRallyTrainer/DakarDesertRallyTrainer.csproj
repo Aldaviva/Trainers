@@ -68,6 +68,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cheats\NoDamageCheat.cs" />
     <Compile Include="Games\DakarDesertRally.cs" />
     <Compile Include="Cheats\NoSpeedLimitCheat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

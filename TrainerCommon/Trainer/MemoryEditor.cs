@@ -11,6 +11,8 @@ namespace TrainerCommon.Trainer;
 
 public static class MemoryEditor {
 
+    private static readonly Encoding DEFAULT_ENCODING = Encoding.Unicode;
+
     public static ProcessHandle? openProcess(Process targetProcess) {
         IntPtr handle = Win32.OpenProcess(
             Win32.ProcessAccessFlags.VIRTUAL_MEMORY_READ |
@@ -44,15 +46,17 @@ public static class MemoryEditor {
         }
     }
 
-    private static byte[] convertValueToBuffer<T>(T value) {
-        object valueObject = value!;
-
-        return Type.GetTypeCode(typeof(T)) switch {
-            TypeCode.String => Encoding.Unicode.GetBytes((string) valueObject),
-            TypeCode.Int32  => BitConverter.GetBytes((int) valueObject),
-            _               => throw new ArgumentOutOfRangeException()
-        };
+    public static void writeToProcessMemory(ProcessHandle processHandle, MemoryAddress memoryAddress, string value, Encoding? characterEncoding = default) {
+        characterEncoding ??= DEFAULT_ENCODING;
+        writeToProcessMemory(processHandle, memoryAddress, characterEncoding.GetBytes(value));
     }
+
+    private static byte[] convertValueToBuffer<T>(T value) => value switch {
+        byte[] bytes => bytes,
+        int i        => BitConverter.GetBytes(i),
+        // strings are handled separately by writeToProcessMemory(ProcessHandle, MemoryAddress, string, Encoding?)
+        _ => throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(convertValueToBuffer)} does not support input type {typeof(T)}")
+    };
 
     public static IntPtr getModuleBaseAddressByName(ProcessHandle processHandle, string? moduleName) {
         string cacheKey = moduleName ?? string.Empty;
