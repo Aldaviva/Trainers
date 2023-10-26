@@ -22,6 +22,7 @@ public abstract class BaseCheat: Cheat {
 
     public abstract string name { get; }
     public abstract Combination keyboardShortcut { get; }
+
     protected abstract void apply(ProcessHandle processHandle, string gameVersionCode);
 
     public SettableProperty<bool> isEnabled { get; } = new StoredProperty<bool>();

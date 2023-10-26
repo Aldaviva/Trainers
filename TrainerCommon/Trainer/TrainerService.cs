@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
+using KoKo.Property;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
-using KoKo.Property;
+using TrainerCommon.App;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
@@ -49,17 +51,22 @@ public class TrainerServiceImpl: TrainerService {
 
             while (!cancellationTokenSource.IsCancellationRequested) {
                 await Task.Delay(_attachmentState.Value switch {
-                    AttachmentState.TRAINER_STOPPED                  => 0,
-                    AttachmentState.ATTACHED                         => 100, // same as Cheat Engine's default Freeze Interval (General Settings)
-                    AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => 1000,
-                    AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => 1000,
-                    AttachmentState.PROGRAM_NOT_RUNNING              => 3000,
-                    AttachmentState.UNSUPPORTED_PROGRAM_VERSION      => 10000,
-                    _                                                => throw new ArgumentOutOfRangeException()
+                    AttachmentState.TRAINER_STOPPED             => 0,
+                    AttachmentState.ATTACHED                    => 100, // same as Cheat Engine's default Freeze Interval (General Settings)
+                    AttachmentState.PROGRAM_NOT_RUNNING         => 3000,
+                    AttachmentState.UNSUPPORTED_PROGRAM_VERSION => 10000,
+                    _                                           => throw new ArgumentOutOfRangeException()
                 }, cancellationTokenSource.Token);
 
-                gameProcess ??= Process.GetProcessesByName(game.processName).FirstOrDefault();
-                if (gameProcess == null || gameProcess.HasExited) {
+                if (gameProcess == null) {
+                    (gameProcess, IEnumerable<Process>? otherProcesses) = Process.GetProcessesByName(game.processName).HeadAndTail();
+
+                    foreach (Process otherProcess in otherProcesses) {
+                        otherProcess.Dispose();
+                    }
+                }
+
+                if (gameProcess?.HasExited ?? true) {
                     cleanUpGameProcess();
                     continue;
                 }
@@ -88,24 +95,22 @@ public class TrainerServiceImpl: TrainerService {
                     continue;
                 }
 
-                try {
-                    foreach (Cheat cheat in game.cheats) {
+                _attachmentState.Value = AttachmentState.ATTACHED;
+
+                foreach (Cheat cheat in game.cheats) {
+                    try {
                         cheat.applyIfNecessary(gameProcessHandle, gameVersionCode!);
-                    }
+                    } catch (ApplicationException e) {
+                        Trace.WriteLine("ApplicationException: " + e);
+                    } catch (Win32Exception e) {
+                        Trace.WriteLine($"Win32Exception: (NativeErrorCode = {e.NativeErrorCode}) " + e);
+                        if (e.NativeErrorCode != 299) {
+                            Console.WriteLine(e);
+                        }
 
-                    _attachmentState.Value = AttachmentState.ATTACHED;
-                } catch (ApplicationException e) {
-                    Trace.WriteLine("ApplicationException: " + e);
-                    _attachmentState.Value = AttachmentState.MEMORY_ADDRESS_NOT_FOUND;
-                } catch (Win32Exception e) {
-                    Trace.WriteLine($"Win32Exception: (NativeErrorCode = {e.NativeErrorCode}) " + e);
-                    _attachmentState.Value = AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ;
-                    if (e.NativeErrorCode != 299) {
-                        Console.WriteLine(e);
+                        Trace.WriteLine("Memory address could not be read");
+                        Trace.WriteLine(e);
                     }
-
-                    Trace.WriteLine("Memory address could not be read");
-                    Trace.WriteLine(e);
                 }
             }
 

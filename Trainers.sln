@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dakar18Trainer", "Dakar18Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DakarDesertRallyTrainer", "DakarDesertRallyTrainer\DakarDesertRallyTrainer.csproj", "{505A7980-3CA8-4F1F-A914-9EF547133C12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C2DC40C8-996D-4669-B171-BBB44EEAC342}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{505A7980-3CA8-4F1F-A914-9EF547133C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{505A7980-3CA8-4F1F-A914-9EF547133C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{505A7980-3CA8-4F1F-A914-9EF547133C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DC40C8-996D-4669-B171-BBB44EEAC342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DC40C8-996D-4669-B171-BBB44EEAC342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DC40C8-996D-4669-B171-BBB44EEAC342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DC40C8-996D-4669-B171-BBB44EEAC342}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

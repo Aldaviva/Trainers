@@ -7,6 +7,7 @@ namespace TrainerCommon.Trainer;
 
 public interface MemoryAddress {
 
+    /// <exception cref="ApplicationException" accessor="get">if the memory could not be read</exception>
     public IntPtr address { get; }
 
 }
@@ -36,6 +37,7 @@ public readonly struct IndirectMemoryAddress: MemoryAddress {
         this.pointerOffsets = pointerOffsets;
     }
 
+    /// <inheritdoc />
     public IntPtr address {
         get {
             /*

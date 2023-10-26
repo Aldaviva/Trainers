@@ -36,6 +36,7 @@ public static class MemoryEditor {
         return convertBufferToType<T>(buffer);
     }
 
+    /// <exception cref="ApplicationException">if the memory could not be read, or the wrong number of bytes were written</exception>
     public static void writeToProcessMemory<T>(ProcessHandle processHandle, MemoryAddress memoryAddress, T value) {
         byte[] buffer = convertValueToBuffer(value);
 

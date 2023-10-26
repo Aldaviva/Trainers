@@ -1,8 +1,8 @@
 ﻿#nullable enable
 
+using KoKo.Property;
 using System;
 using System.Threading;
-using KoKo.Property;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
@@ -21,13 +21,11 @@ public class MainWindowViewModel {
         this.game = game;
 
         statusBarAttachmentMessage = DerivedProperty<string>.Create(trainerService.attachmentState, attached => attached switch {
-            AttachmentState.TRAINER_STOPPED                  => "Attaching to game…",
-            AttachmentState.PROGRAM_NOT_RUNNING              => "Waiting for game to start",
-            AttachmentState.MEMORY_ADDRESS_NOT_FOUND         => "Attached, memory address not found",
-            AttachmentState.MEMORY_ADDRESS_COULD_NOT_BE_READ => "Attached, memory unreadable",
-            AttachmentState.ATTACHED                         => "Attached to game process",
-            AttachmentState.UNSUPPORTED_PROGRAM_VERSION      => "Unsupported game version",
-            _                                                => throw new ArgumentOutOfRangeException(nameof(attached), attached, null)
+            AttachmentState.TRAINER_STOPPED             => "Attaching to game…",
+            AttachmentState.PROGRAM_NOT_RUNNING         => "Waiting for game to start",
+            AttachmentState.ATTACHED                    => "Attached to game process",
+            AttachmentState.UNSUPPORTED_PROGRAM_VERSION => "Unsupported game version",
+            _                                           => throw new ArgumentOutOfRangeException(nameof(attached), attached, null)
         });
 
         statusBarAttachmentMessage.EventSynchronizationContext = SynchronizationContext.Current;
