@@ -56,7 +56,7 @@ public class ExtensionsTest {
     }
 
     [Fact]
-    public void primitiveTypes() {
+    public void valueTypes() {
         new[] { true }.HeadAndTailStruct().head.Should().Be(true);
         new[] { (byte) 0 }.HeadAndTailStruct().head.Should().Be(0);
         new[] { (sbyte) 0 }.HeadAndTailStruct().head.Should().Be(0);
@@ -88,6 +88,22 @@ public class ExtensionsTest {
         (int? head, IEnumerable<int> tail) = enumerable.HeadAndTailStruct();
         head.Should().Be(1);
         tail.Should().HaveCount(99);
+    }
+
+    [Fact]
+    public void nullableValueTypes() {
+        IEnumerable<int?> enumerable = new int?[] { 1, 2, 3 };
+        (int? head, IEnumerable<int?>? tail) = enumerable.HeadAndTailStruct();
+        head.Should().Be(1);
+        tail.Should().Equal(2, 3);
+    }
+
+    [Fact]
+    public void nullableReferenceTypes() {
+        IEnumerable<string?> enumerable = new[] { "1", "2", "3" };
+        (string? head, IEnumerable<string?>? tail) = enumerable.HeadAndTail();
+        head.Should().Be("1");
+        tail.Should().Equal("2", "3");
     }
 
     private enum MyEnum {
