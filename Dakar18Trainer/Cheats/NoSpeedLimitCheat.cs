@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
-using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
+using System.Windows.Forms;
 using TrainerCommon.Cheats;
 using TrainerCommon.Trainer;
 
@@ -9,7 +9,7 @@ namespace Dakar18Trainer.Cheats;
 
 public class NoSpeedLimitCheat: BaseCheat {
 
-    private static readonly int[] SPEED_LIMIT_OFFSETS = { 0x04194850, 0x28, 0x1A0, 0x1B0, 0xA0, 0x20, 0x20, 0x830, 0x3A8 };
+    private static readonly int[] SPEED_LIMIT_OFFSETS = [0x04194850, 0x28, 0x1A0, 0x1B0, 0xA0, 0x20, 0x20, 0x830, 0x3A8];
 
     public override string name { get; } = "No speed limit";
 

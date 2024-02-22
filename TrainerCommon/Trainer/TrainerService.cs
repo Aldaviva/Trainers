@@ -10,7 +10,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
-using TrainerCommon.App;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 

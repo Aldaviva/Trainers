@@ -4,9 +4,9 @@
     ".NETFramework,Version=v4.7.2": {
       "ILRepack.Lib.MSBuild.Task": {
         "type": "Direct",
-        "requested": "[2.0.18.2, )",
-        "resolved": "2.0.18.2",
-        "contentHash": "lreK19MMDA/ekeqjLY4w171cG7+pHwjeTMHMNq6tghuhTOIOfHT+b/LTMj5jpfbJoR7J6AMD3yOYZoyY/2wtJA=="
+        "requested": "[2.0.26, )",
+        "resolved": "2.0.26",
+        "contentHash": "dSvyqVB6qs/PqSWXMRZ5da2Vm1Tz25xcMlA1AdvS9++ORFhBb3nBTOfolf3oUGgAcBH1LPLo948/GWjcVmNdMQ=="
       },
       "DarkNet": {
         "type": "Transitive",
@@ -20,8 +20,8 @@
       },
       "McMaster.Extensions.CommandLineUtils": {
         "type": "Transitive",
-        "resolved": "4.1.0",
-        "contentHash": "NfWFfSV/y5kiau70GDm5eUl6VKF3y2/O5yz//gsV7q+3hreQ8ViB/9VYBC5LykcCYXl5181Vg+OLT/I7fHbxoQ==",
+        "resolved": "4.1.1",
+        "contentHash": "zxgDY+G5yVq2q8sVB3Z275Qkxed1jC95nwAfnlSyoG4l5Nicvd4+ke1jXusEZEfyuErlAgXCKS937c13FmZWBg==",
         "dependencies": {
           "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
           "System.ValueTuple": "4.5.0"
@@ -47,7 +47,7 @@
         "dependencies": {
           "DarkNet": "[2.3.0, )",
           "KoKo": "[2.2.0, )",
-          "McMaster.Extensions.CommandLineUtils": "[4.1.0, )",
+          "McMaster.Extensions.CommandLineUtils": "[4.1.1, )",
           "MouseKeyHook": "[5.7.1, )"
         }
       }

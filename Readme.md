@@ -59,6 +59,7 @@ Trainers
 
 #### Supported game versions
 
+- [**2.3.0**](https://store.steampowered.com/news/app/1839940/view/4027975938511238388), released on February 12, 2024, which has build number `13351034`. This version fixed a crash and bike audio. It is a hotfix for the [USA Tour update](https://store.steampowered.com/news/app/1839940/view/6715496576543059671) from January 15, 2024.
 - [**1.9.0**](https://store.steampowered.com/news/app/1839940/view/6466647949833257321), released on April 13, 2023, which has build number `10880370`. This version introduced the Classic Vehicle Pack #1 add-on.
 - [**1.7.0**](https://store.steampowered.com/news/app/1839940/view/3654145459652107245), released on February 28, 2023, which has build number `10618159`. This version introduced the SnowRunner Truck Pack add-on.
 - [**1.6.0**](https://store.steampowered.com/news/app/1839940/view/3644009189553404411), released on January 20, 2023, which has build number `10366290`. This version introduced the Free Roam game mode.

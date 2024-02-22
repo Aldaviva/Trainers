@@ -75,7 +75,7 @@ public static class MemoryEditor {
 
     private static T convertBufferToType<T>(byte[] buffer) {
         return (T) (object) (Type.GetTypeCode(typeof(T)) switch {
-            TypeCode.String => Encoding.Unicode.GetString(buffer, 0, buffer.Length).Split(new[] { (char) 0 }, 2)[0],
+            TypeCode.String => Encoding.Unicode.GetString(buffer, 0, buffer.Length).Split([(char) 0], 2)[0],
             TypeCode.Int32  => BitConverter.ToInt32(BitConverter.IsLittleEndian ? buffer : buffer.Reverse().ToArray(), 0),
             _               => throw new ArgumentOutOfRangeException()
         });
