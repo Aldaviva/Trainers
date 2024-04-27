@@ -128,6 +128,7 @@ public class TrainerServiceImpl: TrainerService {
         }, cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
     }
 
+    /// <returns>lowercase hexadecimal SHA-256 hash of the file specified by <paramref name="filename"/></returns>
     private static string readFileHash(string filename) {
         using FileStream fileStream = File.OpenRead(filename);
         using SHA256     sha256     = SHA256.Create();

@@ -84,7 +84,7 @@
 
     <Style TargetType="CheckBox">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template" Value="{StaticResource CheckBoxTemplate1}"></Setter>
+        <Setter Property="Template" Value="{StaticResource CheckBoxTemplate1}" />
     </Style>
 
     <Style TargetType="StatusBar">
@@ -95,4 +95,5 @@
     <Style TargetType="TextBlock" x:Key="statusBarText" BasedOn="{StaticResource commonStatusBarText}">
         <Setter Property="Foreground" Value="#dedede" />
     </Style>
+
 </ResourceDictionary>

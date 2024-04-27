@@ -10,6 +10,6 @@
         <Setter Property="BorderBrush" Value="#FFD7D7D7" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="statusBarText" BasedOn="{StaticResource commonStatusBarText}">
-    </Style>
+    <Style TargetType="TextBlock" x:Key="statusBarText" BasedOn="{StaticResource commonStatusBarText}" />
+
 </ResourceDictionary>

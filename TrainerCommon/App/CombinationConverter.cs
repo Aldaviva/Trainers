@@ -1,12 +1,12 @@
 ﻿#nullable enable
 
+using Gma.System.MouseKeyHook;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Forms;
-using Gma.System.MouseKeyHook;
 
 namespace TrainerCommon.App;
 
@@ -17,8 +17,8 @@ public class CombinationConverter: IValueConverter {
     /// <summary>
     /// Like Gma.System.MouseKeyHook.Combination.ToString() but it prints Ctrl instead of Control like a normal menu hotkey
     /// </summary>
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-        if (value is Combination combination) {
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
+        if (value is Combination combination && targetType == typeof(string)) {
             IEnumerable<string> modifiers = combination.Chord
                 .OrderBy(key => key, HOTKEY_SORTER)
                 .Select(key => key switch {
@@ -32,12 +32,13 @@ public class CombinationConverter: IValueConverter {
         }
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) {
         throw new NotImplementedException();
     }
 
     /// <summary>
-    /// Sort Shift after Ctrl and Alt, since this is how hotkeys appear in menus in Windows.
+    /// <para>Sort Shift after Ctrl and Alt, since this is how hotkeys appear in menus in Windows.</para>
+    /// <para>The sorting order is Win, Ctrl, Alt, Shift</para>
     /// </summary>
     private class HotkeySorter: IComparer<Keys> {
 

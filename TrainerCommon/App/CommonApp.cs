@@ -1,15 +1,15 @@
 ﻿#nullable enable
 
+using Dark.Net;
+using Dark.Net.Wpf;
+using Gma.System.MouseKeyHook;
+using McMaster.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using Dark.Net;
-using Dark.Net.Wpf;
-using Gma.System.MouseKeyHook;
-using McMaster.Extensions.CommandLineUtils;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
@@ -39,18 +39,18 @@ public abstract class CommonApp: Application {
 
         MainWindowViewModel viewModel = new(game, trainerService);
 
-        if (e.Args.Any(arg => arg.ToLower() is "-?" or "-h" or "--help" or "/?" or "/h" or "/help")) {
+        if (e.Args.Any(arg => arg.ToLower() is "-?" or "-h" or "--help" or "/?" or "/h" or "/help" or "help")) {
             string executableName = Path.GetFileName(Environment.GetCommandLineArgs()[0]);
             MessageBox.Show($"""
-                {executableName}
+                             {executableName}
+                             
+                                 Trainer window is shown, and no cheats are enabled by default.
 
-                    Trainer window is shown, and no cheats are enabled by default.
-
-                {executableName} --enable-cheat "{game.cheats.First().name}"
-
-                    Trainer window is shown, and the specified cheat is enabled automatically.
-                    You can pass --enable-cheat more than once to enable multiple cheats at startup.
-                """, "Usage", MessageBoxButton.OK, MessageBoxImage.Information);
+                             {executableName} --enable-cheat "{game.cheats.First().name}"
+                             
+                                 Trainer window is shown, and the specified cheat is enabled automatically.
+                                 You can pass --enable-cheat more than once to enable multiple cheats at startup.
+                             """, "Usage", MessageBoxButton.OK, MessageBoxImage.Information);
             Current.Shutdown(0);
         }
 

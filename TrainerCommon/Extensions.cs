@@ -24,13 +24,7 @@ public static class Extensions {
         return (head: enumerator.MoveNext() ? enumerator.Current : null, tail: new Enumerable<T?>(enumerator));
     }
 
-    private class Enumerable<T>: IEnumerable<T> {
-
-        private readonly IEnumerator<T> enumerator;
-
-        public Enumerable(IEnumerator<T> enumerator) {
-            this.enumerator = enumerator;
-        }
+    private class Enumerable<T>(IEnumerator<T> enumerator): IEnumerable<T> {
 
         public IEnumerator<T> GetEnumerator() => enumerator;
 

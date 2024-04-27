@@ -1,4 +1,4 @@
-Trainers
+🏃 Trainers
 ===
 
 <a id="requirements"></a>
@@ -60,15 +60,15 @@ Trainers
 
 #### Supported game versions
 
-|Version|Distributor|Release date|Changes|
-|-|-|-|-|
-|2.3.420|Epic Games|2024-03|Fixed Logitech G920 wheel crash|
-|2.3.0|Steam|[2024-03-18](https://store.steampowered.com/news/app/1839940/view/6923793758884093997)|Fixed Logitech G920 wheel crash|
-|2.3.0|Steam|[2024-02-12](https://store.steampowered.com/news/app/1839940/view/4027975938511238388)|[USA Tour](https://store.steampowered.com/news/app/1839940/view/6715496576543059671) plus fixes for crash and bike audio|
-|1.9.0|Steam|[2023-04-13](https://store.steampowered.com/news/app/1839940/view/6466647949833257321)|Classic Vehicle Pack #1|
-|1.7.0|Steam|[2023-02-28](https://store.steampowered.com/news/app/1839940/view/3654145459652107245)|SnowRunner Truck Pack|
-|1.6.0|Steam|[2023-01-20](https://store.steampowered.com/news/app/1839940/view/3644009189553404411)|Free Roam|
-|1.5.0|Steam|[2022-11-15](https://store.steampowered.com/news/app/1839940/view/5379014706391343864)|7 new events in Extended Saudi Arabia Map|
+|Version|Distributor|Release date|Build|Changes|
+|-|-|-|-:|-|
+|2.3.420|Epic Games|2024-03||Fixed Logitech G920 wheel crash|
+|[2.3.0](https://store.steampowered.com/news/app/1839940/view/6923793758884093997)|Steam|2024-03-18|13722644|Fixed Logitech G920 wheel crash|
+|[2.3.0](https://store.steampowered.com/news/app/1839940/view/4027975938511238388)|Steam|2024-02-12|13351034|[USA Tour](https://store.steampowered.com/news/app/1839940/view/6715496576543059671) plus fixes for crash and bike audio|
+|[1.9.0](https://store.steampowered.com/news/app/1839940/view/6466647949833257321)|Steam|2023-04-13|10880370|Classic Vehicle Pack #1|
+|[1.7.0](https://store.steampowered.com/news/app/1839940/view/3654145459652107245)|Steam|2023-02-28|10618159|SnowRunner Truck Pack|
+|[1.6.0](https://store.steampowered.com/news/app/1839940/view/3644009189553404411)|Steam|2023-01-20|10366290|Free Roam|
+|[1.5.0](https://store.steampowered.com/news/app/1839940/view/5379014706391343864)|Steam|2022-11-15|9902125|7 new events in Extended Saudi Arabia Map|
 
 ### Superhot: Mind Control Delete
 

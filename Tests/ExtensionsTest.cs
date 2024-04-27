@@ -1,5 +1,3 @@
-#nullable enable
-
 using FluentAssertions;
 using TrainerCommon;
 
@@ -9,13 +7,13 @@ public class ExtensionsTest {
 
     [Fact]
     public void headValueType() {
-        IEnumerable<int> enumerable = new[] { 1, 2, 3 };
+        IEnumerable<int> enumerable = [1, 2, 3];
         enumerable.HeadAndTailStruct().head.Should().Be(1);
     }
 
     [Fact]
     public void headReferenceType() {
-        IEnumerable<string> enumerable = new[] { "1", "2", "3" };
+        IEnumerable<string> enumerable = ["1", "2", "3"];
         enumerable.HeadAndTail().head.Should().Be("1");
     }
 
@@ -33,25 +31,25 @@ public class ExtensionsTest {
 
     [Fact]
     public void tailValueType() {
-        IEnumerable<int> enumerable = new[] { 1, 2, 3 };
+        IEnumerable<int> enumerable = [1, 2, 3];
         enumerable.HeadAndTailStruct().tail.Should().Equal(2, 3);
     }
 
     [Fact]
     public void tailReferenceType() {
-        IEnumerable<string> enumerable = new[] { "1", "2", "3" };
+        IEnumerable<string> enumerable = ["1", "2", "3"];
         enumerable.HeadAndTail().tail.Should().Equal("2", "3");
     }
 
     [Fact]
     public void noTailValueTypes() {
-        IEnumerable<int> enumerable = new[] { 1 };
+        IEnumerable<int> enumerable = [1];
         enumerable.HeadAndTailStruct().tail.Should().BeEmpty();
     }
 
     [Fact]
     public void noTailReferenceTypes() {
-        IEnumerable<string> enumerable = new[] { "1" };
+        IEnumerable<string> enumerable = ["1"];
         enumerable.HeadAndTail().tail.Should().BeEmpty();
     }
 
@@ -92,7 +90,7 @@ public class ExtensionsTest {
 
     [Fact]
     public void nullableValueTypes() {
-        IEnumerable<int?> enumerable = new int?[] { 1, 2, 3 };
+        IEnumerable<int?> enumerable = [1, 2, 3];
         (int? head, IEnumerable<int?>? tail) = enumerable.HeadAndTailStruct();
         head.Should().Be(1);
         tail.Should().Equal(2, 3);
@@ -100,7 +98,7 @@ public class ExtensionsTest {
 
     [Fact]
     public void nullableReferenceTypes() {
-        IEnumerable<string?> enumerable = new[] { "1", "2", "3" };
+        IEnumerable<string?> enumerable = ["1", "2", "3"];
         (string? head, IEnumerable<string?>? tail) = enumerable.HeadAndTail();
         head.Should().Be("1");
         tail.Should().Equal("2", "3");
