@@ -14,9 +14,11 @@ public class NoDamageCheat: BaseCheat {
 
     private const string DISABLED_MEMORY_VALUE = "bBanGetMechDamage"; // defaults to "bCanGetMechDamage"
 
-    private static readonly Encoding ENCODING             = new ASCIIEncoding();
-    private static readonly int[]    DAMAGE_OFFSETS_2_3_0 = [0x5b8f810, 0x19aae];
-    private static readonly int[]    DAMAGE_OFFSETS_1_9_0 = [0x59a8c40, 0x1edde];
+    private static readonly Encoding ENCODING                         = new ASCIIEncoding();
+    private static readonly int[]    DAMAGE_OFFSETS_2_3_0_EPIC_2403   = [0x5B8F850, 0x196BE];
+    private static readonly int[]    DAMAGE_OFFSETS_2_3_420_EPIC_2404 = [0x5B8F850, 0x1966A];
+    private static readonly int[]    DAMAGE_OFFSETS_2_3_0_STEAM_2402  = [0x5B8F810, 0x19AAE];
+    private static readonly int[]    DAMAGE_OFFSETS_1_9_0_STEAM_2304  = [0x59A8C40, 0x1EDDE];
 
     public override string name { get; } = "No damage";
 
@@ -24,9 +26,11 @@ public class NoDamageCheat: BaseCheat {
 
     protected override void apply(ProcessHandle processHandle, string gameVersionCode) {
         int[] damageOffsets = gameVersionCode switch {
-            DakarDesertRally.Versions.V2_3_0 => DAMAGE_OFFSETS_2_3_0,
-            DakarDesertRally.Versions.V1_9_0 => DAMAGE_OFFSETS_1_9_0,
-            _                                => []
+            DakarDesertRally.Versions.V2_3_0_STEAM_2403  => DAMAGE_OFFSETS_2_3_0_EPIC_2403,
+            DakarDesertRally.Versions.V2_3_420_EPIC_2404 => DAMAGE_OFFSETS_2_3_420_EPIC_2404,
+            DakarDesertRally.Versions.V2_3_0_STEAM_2402  => DAMAGE_OFFSETS_2_3_0_STEAM_2402,
+            DakarDesertRally.Versions.V1_9_0_STEAM_2304  => DAMAGE_OFFSETS_1_9_0_STEAM_2304,
+            _                                            => []
         };
 
         if (damageOffsets.Any()) {

@@ -48,22 +48,27 @@ Trainers
 
 - No speed limit
     - All speed limit penalties, and red and yellow speed warnings, are removed in all difficulty levels.
-    - The gray speed limit warning is still visible in Simulation Mode and areas with speed limits, like villages and passage control.
-    - Hilariously, you are *not* limited to 30 km/h in passage control auto-driving zones, unlike in [Dakar 18](#dakar-18). Therefore, you may want to slow down and disable this cheat before entering passage control, in order to avoid missing the exit and getting stuck in auto-drive for the rest of the stage.
+    - The gray speed limit warning is still visible in Simulation Mode and areas with speed limits, like villages and passage control, but it's not enforced.
+    - Hilariously, you are *not* limited to 30 km/h in passage control auto-driving zones, unlike in [Dakar 18](#dakar-18). Therefore, you may want to slow down and disable this cheat before entering passage control, in order to avoid [missing the exit and getting stuck in auto-drive for the rest of the stage](https://twitter.com/Aldaviva/status/1602037249650081793).
 - No damage
     - Vehicles don't take damage to the Mechanics, Wheels, or Suspension parts categories during stages.
     - They still take Body damage, including dirt and bent body panels, but these don't affect the vehicle's performance.
     - The co-driver will still exclaim when you would have taken damage.
     - Enable this cheat before starting a stage. If you enable it during a stage, it won't take effect until the next stage.
     - After disabling this cheat, restart the game for it to take effect.
+    - This cheat is little unreliable and may not work all the time. If you can't get it to work, try restarting the game while the cheat is already enabled in the trainer.
 
 #### Supported game versions
 
-- [**2.3.0**](https://store.steampowered.com/news/app/1839940/view/4027975938511238388), released on February 12, 2024, which has build number `13351034`. This version fixed a crash and bike audio. It is a hotfix for the [USA Tour update](https://store.steampowered.com/news/app/1839940/view/6715496576543059671) from January 15, 2024.
-- [**1.9.0**](https://store.steampowered.com/news/app/1839940/view/6466647949833257321), released on April 13, 2023, which has build number `10880370`. This version introduced the Classic Vehicle Pack #1 add-on.
-- [**1.7.0**](https://store.steampowered.com/news/app/1839940/view/3654145459652107245), released on February 28, 2023, which has build number `10618159`. This version introduced the SnowRunner Truck Pack add-on.
-- [**1.6.0**](https://store.steampowered.com/news/app/1839940/view/3644009189553404411), released on January 20, 2023, which has build number `10366290`. This version introduced the Free Roam game mode.
-- [**1.5.0**](https://store.steampowered.com/news/app/1839940/view/5379014706391343864), released on November 15, 2022, which has build number `9902125`. This version introduced 7 new events in the Extended Saudi Arabia Map add-on.
+|Version|Distributor|Release date|Changes|
+|-|-|-|-|
+|2.3.420|Epic Games|2024-03|Fixed Logitech G920 wheel crash|
+|2.3.0|Steam|[2024-03-18](https://store.steampowered.com/news/app/1839940/view/6923793758884093997)|Fixed Logitech G920 wheel crash|
+|2.3.0|Steam|[2024-02-12](https://store.steampowered.com/news/app/1839940/view/4027975938511238388)|[USA Tour](https://store.steampowered.com/news/app/1839940/view/6715496576543059671) plus fixes for crash and bike audio|
+|1.9.0|Steam|[2023-04-13](https://store.steampowered.com/news/app/1839940/view/6466647949833257321)|Classic Vehicle Pack #1|
+|1.7.0|Steam|[2023-02-28](https://store.steampowered.com/news/app/1839940/view/3654145459652107245)|SnowRunner Truck Pack|
+|1.6.0|Steam|[2023-01-20](https://store.steampowered.com/news/app/1839940/view/3644009189553404411)|Free Roam|
+|1.5.0|Steam|[2022-11-15](https://store.steampowered.com/news/app/1839940/view/5379014706391343864)|7 new events in Extended Saudi Arabia Map|
 
 ### Superhot: Mind Control Delete
 
