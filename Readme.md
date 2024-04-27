@@ -49,6 +49,7 @@
 - No speed limit
     - All speed limit penalties, and red and yellow speed warnings, are removed in all difficulty levels.
     - The gray speed limit warning is still visible in Simulation Mode and areas with speed limits, like villages and passage control, but it's not enforced.
+    - The co-driver doesn't scold you for going fast.
     - Hilariously, you are *not* limited to 30 km/h in passage control auto-driving zones, unlike in [Dakar 18](#dakar-18). Therefore, you may want to slow down and disable this cheat before entering passage control, in order to avoid [missing the exit and getting stuck in auto-drive for the rest of the stage](https://twitter.com/Aldaviva/status/1602037249650081793).
 - No damage
     - Vehicles don't take damage to the Mechanics, Wheels, or Suspension parts categories during stages.
@@ -56,7 +57,7 @@
     - The co-driver will still exclaim when you would have taken damage.
     - Enable this cheat before starting a stage. If you enable it during a stage, it won't take effect until the next stage.
     - After disabling this cheat, restart the game for it to take effect.
-    - This cheat is little unreliable and may not work all the time. If you can't get it to work, try restarting the game while the cheat is already enabled in the trainer.
+    - This cheat is little unreliable and may not work all the time. If you can't get it to work, try restarting the game while this cheat is still enabled in the trainer.
 
 #### Supported game versions
 
@@ -81,3 +82,7 @@
 #### Supported game versions
 
 - **1.0.0**, which has file version `2018.4.5.14584`
+
+## Acknowledgments
+
+- [Dewlapped](https://github.com/Dewlapped) for help updating the Dakar Desert Rally trainer to support the 2024-03-18 Steam release of the game
