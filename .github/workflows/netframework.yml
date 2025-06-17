@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.3.1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Clone
-      uses: actions/checkout@v3.3.0
+      uses: actions/checkout@v4
 
     - name: Restore
       run: msbuild -t:restore -p:RestoreLockedMode=true -m
@@ -28,7 +28,7 @@ jobs:
         Copy-Item -Destination .\upload\ *\bin\Release\*.exe
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v4
       with:
         name: Trainers
         path: upload

@@ -22,6 +22,7 @@
 
 - [Dakar 18](#dakar-18)
 - [Dakar Desert Rally](#dakar-desert-rally)
+- [Star Trucker](#star-trucker)
 - [Superhot: Mind Control Delete](#superhot-mind-control-delete)
 
 <!-- /MarkdownTOC -->
@@ -70,6 +71,24 @@
 |[1.7.0](https://store.steampowered.com/news/app/1839940/view/3654145459652107245)|Steam|2023-02-28|10618159|SnowRunner Truck Pack|
 |[1.6.0](https://store.steampowered.com/news/app/1839940/view/3644009189553404411)|Steam|2023-01-20|10366290|Free Roam|
 |[1.5.0](https://store.steampowered.com/news/app/1839940/view/5379014706391343864)|Steam|2022-11-15|9902125|7 new events in Extended Saudi Arabia Map|
+
+### Star Trucker
+
+![trainer screenshot](.github/images/startrucker.png)
+
+[💾 Download](https://github.com/Aldaviva/Trainers/releases/latest/download/StarTruckerTrainer.exe)
+
+- Turbopump System (acceleration) doesn't degrade
+- Combusion Chambers (top speed) don't degrade
+- Nozzle Coolers (coolant) don't degrade
+- Engine Control Unit (fuel economy) doesn't degrade
+- Sensors don't degrade
+
+#### Supported game versions
+
+|Version|Distributor|Release date|Build|Changes|
+|-|-|-|-:|-|
+|[1.0.64](https://store.steampowered.com/news/app/2380050/view/497197576207993354)|Steam|2025-06-12|18840658|[Perks, Plates, and Parking](https://store.steampowered.com/news/app/2380050/view/497197576207993320)|
 
 ### Superhot: Mind Control Delete
 
