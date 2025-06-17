@@ -1,7 +1,7 @@
 ﻿#nullable enable
-using System.Collections.Generic;
 using Gma.System.MouseKeyHook;
 using KoKo.Property;
+using System.Collections.Generic;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
@@ -39,6 +39,8 @@ internal class SampleMainWindowViewModel: MainWindowViewModel {
                 this.name        = name;
                 keyboardShortcut = Combination.FromString(keyBoardShortcut);
             }
+
+            public void Dispose() { }
 
         }
 

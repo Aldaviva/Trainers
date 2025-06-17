@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using Dark.Net;
 using Dark.Net.Wpf;
@@ -18,8 +18,8 @@ namespace TrainerCommon.App;
 
 public abstract class CommonApp: Application {
 
-    private IKeyboardMouseEvents? keyboardShortcuts;
-    private TrainerService?       trainerService;
+    public IKeyboardMouseEvents keyboardShortcuts { get; private set; } = null!;
+    private TrainerService? trainerService;
 
     protected abstract Game game { get; }
 
@@ -32,8 +32,9 @@ public abstract class CommonApp: Application {
             getResourceUri("TrainerCommon", "App/Skins/Skin.Dark.xaml"));
 
         keyboardShortcuts = Hook.GlobalEvents();
-        keyboardShortcuts.OnCombination(game.cheats.Select(cheat =>
-            new KeyValuePair<Combination, Action>(cheat.keyboardShortcut, () => cheat.isEnabled.Value ^= true)));
+        keyboardShortcuts.OnCombination(game.cheats
+            .Where(cheat => cheat.keyboardShortcut != null)
+            .Select(cheat => new KeyValuePair<Combination, Action>(cheat.keyboardShortcut!, () => cheat.isEnabled.Value ^= true)));
 
         trainerService = new TrainerServiceImpl();
 
@@ -43,11 +44,11 @@ public abstract class CommonApp: Application {
             string executableName = Path.GetFileName(Environment.GetCommandLineArgs()[0]);
             MessageBox.Show($"""
                              {executableName}
-                             
+
                                  Trainer window is shown, and no cheats are enabled by default.
 
                              {executableName} --enable-cheat "{game.cheats.First().name}"
-                             
+
                                  Trainer window is shown, and the specified cheat is enabled automatically.
                                  You can pass --enable-cheat more than once to enable multiple cheats at startup.
                              """, "Usage", MessageBoxButton.OK, MessageBoxImage.Information);

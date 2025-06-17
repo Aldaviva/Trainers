@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23FF6D01-7F12-40B5-AD86-E280B44EF3F3}</ProjectGuid>
+    <ProjectGuid>{1396A148-9F5A-4E17-ACE6-9E11A89FDE74}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SuperhotMindControlDeleteTrainer</RootNamespace>
-    <AssemblyName>SuperhotMindControlDeleteTrainer</AssemblyName>
+    <RootNamespace>StarTruckerTrainer</RootNamespace>
+    <AssemblyName>StarTruckerTrainer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -15,9 +15,11 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,24 +27,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>
-    </NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>App\shmcd.ico</ApplicationIcon>
+    <ApplicationIcon>App\startrucker.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -64,14 +59,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cheats\InfiniteHealthCheat.cs" />
-    <Compile Include="Games\SuperhotMindControlDelete.cs" />
     <Compile Include="App\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cheats\NoFuelEconomyDegredationCheat.cs" />
+    <Compile Include="Cheats\NoSensorDegredationCheat.cs" />
+    <Compile Include="Cheats\NoNozzleCoolerDegredationCheat.cs" />
+    <Compile Include="Cheats\NoSpeedDegredationCheat.cs" />
+    <Compile Include="Cheats\NoAccelerationDegredationCheat.cs" />
+    <Compile Include="Cheats\ShipUpgradeLevelCheat.cs" />
+    <Compile Include="Games\StarTrucker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,9 +80,6 @@
     <None Include="app.manifest" />
     <None Include="App\App.config" />
     <None Include="packages.lock.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="App\shmcd.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ILRepack.Lib.MSBuild.Task">
@@ -97,6 +94,8 @@
       <Name>TrainerCommon</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="App\startrucker.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

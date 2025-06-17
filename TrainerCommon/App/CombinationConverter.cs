@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using Gma.System.MouseKeyHook;
 using System;
@@ -17,20 +17,17 @@ public class CombinationConverter: IValueConverter {
     /// <summary>
     /// Like Gma.System.MouseKeyHook.Combination.ToString() but it prints Ctrl instead of Control like a normal menu hotkey
     /// </summary>
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
-        if (value is Combination combination && targetType == typeof(string)) {
-            IEnumerable<string> modifiers = combination.Chord
-                .OrderBy(key => key, HOTKEY_SORTER)
-                .Select(key => key switch {
-                    Keys.Control           => "Ctrl",
-                    Keys.LWin or Keys.RWin => "Win",
-                    _                      => key.ToString()
-                });
-            return string.Join("+", modifiers.Append(combination.TriggerKey.ToString()));
-        } else {
-            return value;
-        }
-    }
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value switch {
+        null => string.Empty,
+        Combination combination => string.Join("+", combination.Chord.OrderBy(key => key, HOTKEY_SORTER)
+            .Select(key => key switch {
+                Keys.Control           => "Ctrl",
+                Keys.LWin or Keys.RWin => "Win",
+                _                      => key.ToString()
+            })
+            .Append(combination.TriggerKey.ToString())),
+        _ => value
+    };
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) {
         throw new NotImplementedException();

@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -7,7 +7,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
 [assembly: AssemblyProduct("Dakar 18 v.13 +1 Trainer by Ben")]
-[assembly: AssemblyCopyright("© 2024 Ben Hutchison")]
+[assembly: AssemblyCopyright("© 2025 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,5 +18,5 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly
 )]
 
-[assembly: AssemblyVersion("1.0.10.0")]
-[assembly: AssemblyFileVersion("1.0.10.0")]
+[assembly: AssemblyVersion("1.0.11")]
+[assembly: AssemblyFileVersion("1.0.11")]

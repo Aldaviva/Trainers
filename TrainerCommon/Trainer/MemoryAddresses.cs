@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace TrainerCommon.Trainer;
@@ -12,30 +13,16 @@ public interface MemoryAddress {
 
 }
 
-public readonly struct FixedMemoryAddress: MemoryAddress {
+public readonly struct FixedMemoryAddress(IntPtr address): MemoryAddress {
 
-    public IntPtr address { get; }
-
-    public FixedMemoryAddress(IntPtr address) {
-        this.address = address;
-    }
+    public IntPtr address { get; } = address;
 
 }
 
-public readonly struct IndirectMemoryAddress: MemoryAddress {
-
-    private readonly ProcessHandle processHandle;
-    private readonly string?       moduleName;
-    private readonly int[]         pointerOffsets;
-
-    /// <param name="processHandle"></param>
-    /// <param name="moduleName">The name of the module to which the offsets are relative, such as <c>UnityPlayer.dll</c>, or <c>null</c> to use the process' main module.</param>
-    /// <param name="pointerOffsets"></param>
-    public IndirectMemoryAddress(ProcessHandle processHandle, string? moduleName, int[] pointerOffsets) {
-        this.processHandle  = processHandle;
-        this.moduleName     = moduleName;
-        this.pointerOffsets = pointerOffsets;
-    }
+/// <param name="processHandle"></param>
+/// <param name="moduleName">The name of the module to which the offsets are relative, such as <c>UnityPlayer.dll</c>, or <c>null</c> to use the process' main module.</param>
+/// <param name="pointerOffsets"></param>
+public readonly struct IndirectMemoryAddress(ProcessHandle processHandle, string? moduleName, IReadOnlyList<int> pointerOffsets): MemoryAddress {
 
     /// <inheritdoc />
     public IntPtr address {
@@ -48,7 +35,7 @@ public readonly struct IndirectMemoryAddress: MemoryAddress {
 
             IntPtr memoryAddress = MemoryEditor.getModuleBaseAddressByName(processHandle, moduleName);
 
-            for (int offsetIndex = 0; offsetIndex < pointerOffsets.Length; offsetIndex++) {
+            for (int offsetIndex = 0; offsetIndex < pointerOffsets.Count; offsetIndex++) {
                 int offset = pointerOffsets[offsetIndex];
 
                 if (offsetIndex == 0) {

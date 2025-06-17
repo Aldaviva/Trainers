@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
-[assembly: AssemblyDescription("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
+[assembly: AssemblyTitle("Star Trucker 1.0.64 +5 Trainer by Ben")]
+[assembly: AssemblyDescription("Star Trucker 1.0.64 +5 Trainer by Ben")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
-[assembly: AssemblyProduct("Superhot: Mind Control Delete 1.0.0 +1 Trainer by Ben")]
+[assembly: AssemblyProduct("Star Trucker 1.0.64 +5 Trainer by Ben")]
 [assembly: AssemblyCopyright("© 2025 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

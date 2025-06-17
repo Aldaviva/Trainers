@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
+using Unfucked;
 
 namespace TrainerCommon.Trainer;
 
@@ -42,7 +43,7 @@ public class TrainerServiceImpl: TrainerService {
             throw new ApplicationException("Cannot attach the same TrainerServiceImpl instance to a game more than once.");
         }
 
-        monitorTask = Task.Factory.StartNew(async () => {
+        monitorTask = Task.Run(async () => {
             Process?       gameProcess        = null;
             ProcessHandle? gameProcessHandle  = null;
             string?        gameExecutableHash = null;
@@ -58,7 +59,7 @@ public class TrainerServiceImpl: TrainerService {
                 }, cancellationTokenSource.Token);
 
                 if (gameProcess == null) {
-                    (gameProcess, IEnumerable<Process>? otherProcesses) = Process.GetProcessesByName(game.processName).HeadAndTail();
+                    (gameProcess, IEnumerable<Process> otherProcesses) = Process.GetProcessesByName(game.processName).HeadAndTail();
 
                     foreach (Process otherProcess in otherProcesses) {
                         otherProcess.Dispose();
@@ -125,7 +126,7 @@ public class TrainerServiceImpl: TrainerService {
                 gameExecutableHash = null;
                 gameVersionCode    = null;
             }
-        }, cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
+        }, cancellationTokenSource.Token);
     }
 
     /// <returns>lowercase hexadecimal SHA-256 hash of the file specified by <paramref name="filename"/></returns>
@@ -138,9 +139,10 @@ public class TrainerServiceImpl: TrainerService {
     public void Dispose() {
         cancellationTokenSource.Cancel();
         try {
-            monitorTask?.GetAwaiter().GetResult();
-        } catch (TaskCanceledException) {
-            //cancellation is how this task normally ends
+            monitorTask?.Wait();
+            // } catch (TaskCanceledException) {
+        } catch (AggregateException e) when (e.InnerException is TaskCanceledException) {
+            // cancellation is how this task normally ends
         }
 
         _attachmentState.Value = AttachmentState.TRAINER_STOPPED;
