@@ -8,6 +8,5 @@ namespace StarTruckerTrainer.App;
 public partial class App {
 
     protected override Game game { get; } = new StarTrucker();
-    protected override int windowWidth { get; } = 440;
 
 }

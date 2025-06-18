@@ -78,8 +78,7 @@
 
 [💾 Download](https://github.com/Aldaviva/Trainers/releases/latest/download/StarTruckerTrainer.exe)
 
-- Upgrade ship systems to the maximum level
-    - Also repairs systems if they have degraded
+- Repair all ship upgrades
     - Affects all 10 ship systems
         1. Turbopump System (acceleration)
         1. Combusion Chambers (speed)
@@ -91,9 +90,8 @@
         1. Maglock Dampener (cargo damage resistance)
         1. Suit Station (suit charging)
         1. Sensor Tuning (scanner range)
-    - Keeps you from having to continually waste your time and money trekking to Upgrade Shops every few minutes
-    - Does not upgrade or repair other parts of the ship such as the hull, cargo or items like Universal Control Circuits, skills like Cargo Clearance, or quest upgrades like the Hidden Compartment
-    - Might grant or interfere with the [Max Power achievement](https://truesteamachievements.com/a2941561/max-power-achievement) if you don't already have it
+    - Keeps you from having to continually waste your time and money trekking to Upgrade Shops to repair degraded systems every few minutes
+    - Does not repair other parts of the ship, such as the hull, or items like Universal Control Circuits
 
 #### Supported game versions
 

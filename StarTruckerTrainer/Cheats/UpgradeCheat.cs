@@ -12,13 +12,12 @@ namespace StarTruckerTrainer.Cheats;
 
 public class UpgradeCheat: BaseCheat {
 
-    private const string MODULE_NAME       = "GameAssembly.dll";
-    private const int    MAX_UPGRADE_LEVEL = 10;
+    private const string MODULE_NAME = "GameAssembly.dll";
 
     private static readonly int[]        OFFSETS_TEMPLATE_1_0_64 = [0x0290F700, 0xB8, 0x0, 0x80, 0x30, -1 /* ShipSystem */, 0x64]; // Assembly-CSharp.dll:UpgradeDef.m_currentLevel
     private static readonly ShipSystem[] SHIP_SYSTEMS            = (ShipSystem[]) Enum.GetValues(typeof(ShipSystem));
 
-    public override string name { get; } = "Upgrade and repair all ship systems to maximum level";
+    public override string name { get; } = "Repair all ship upgrades";
     public override Combination? keyboardShortcut { get; } = Combination.TriggeredBy(Keys.U).Alt().Control();
 
     private int[]? offsets;
@@ -40,11 +39,11 @@ public class UpgradeCheat: BaseCheat {
                 OffsetMemoryAddress   currentFunctionalLevelAddress = new(currentLevelAddress, 4);
                 OffsetMemoryAddress   currentHealthAddress          = new(currentLevelAddress, 8);
 
-                int oldLevel = MemoryEditor.readFromProcessMemory<int>(processHandle, currentFunctionalLevelAddress);
-                if (oldLevel < MAX_UPGRADE_LEVEL) {
-                    MemoryEditor.writeToProcessMemory(processHandle, currentLevelAddress, MAX_UPGRADE_LEVEL);
-                    MemoryEditor.writeToProcessMemory(processHandle, currentFunctionalLevelAddress, MAX_UPGRADE_LEVEL);
+                int unlockedLevel = MemoryEditor.readFromProcessMemory<int>(processHandle, currentLevelAddress);
+                int degradedLevel = MemoryEditor.readFromProcessMemory<int>(processHandle, currentFunctionalLevelAddress);
+                if (degradedLevel < unlockedLevel) {
                     MemoryEditor.writeToProcessMemory(processHandle, currentHealthAddress, 1.0f);
+                    MemoryEditor.writeToProcessMemory(processHandle, currentFunctionalLevelAddress, unlockedLevel);
                 }
             }
         }
