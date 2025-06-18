@@ -23,6 +23,8 @@ public abstract class CommonApp: Application {
 
     protected abstract Game game { get; }
 
+    protected virtual int windowWidth { get; } = 360;
+
     protected override void OnStartup(StartupEventArgs e) {
         base.OnStartup(e);
 
@@ -38,7 +40,7 @@ public abstract class CommonApp: Application {
 
         trainerService = new TrainerServiceImpl();
 
-        MainWindowViewModel viewModel = new(game, trainerService);
+        MainWindowViewModel viewModel = new(game, trainerService) { windowWidth = windowWidth };
 
         if (e.Args.Any(arg => arg.ToLower() is "-?" or "-h" or "--help" or "/?" or "/h" or "/help" or "help")) {
             string executableName = Path.GetFileName(Environment.GetCommandLineArgs()[0]);

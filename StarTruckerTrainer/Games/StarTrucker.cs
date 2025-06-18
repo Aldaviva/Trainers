@@ -14,11 +14,7 @@ public class StarTrucker: BaseGame {
     public override string supportedVersion { get; } = "1.0.64";
 
     public override ICollection<Cheat> cheats { get; } = [
-        new NoAccelerationDegredationCheat(),
-        new NoSpeedDegredationCheat(),
-        new NoNozzleCoolerDegredationCheat(),
-        new NoFuelEconomyDegredationCheat(),
-        new NoSensorDegredationCheat()
+        new UpgradeCheat()
     ];
 
     public override string? getVersion(string executableSha256Hash) => executableSha256Hash switch {

@@ -9,7 +9,7 @@
 - `--enable-cheat "CHEAT NAME"`
     - Optional, can be passed 0 or more times.
     - Automatically enables the given cheat on trainer startup, instead of you having to manually click the checkbox.
-    - `CHEAT NAME` is the name of the cheat as it appears in the trainer UI, such as `No speed limit`. Case-insensitive.
+    - `CHEAT NAME` is the name of the cheat as it appears in the trainer UI, such as `No speed limit`. Case-insensitive. Remember to use quotation marks if it contains spaces.
     - Useful if you always want to play a game with a given cheat active, and you want to launch the game with a batch file that both starts the game and starts the trainer with this cheat enabled.
         ```bat
         @echo off
@@ -78,11 +78,22 @@
 
 [💾 Download](https://github.com/Aldaviva/Trainers/releases/latest/download/StarTruckerTrainer.exe)
 
-- Turbopump System (acceleration) doesn't degrade
-- Combusion Chambers (top speed) don't degrade
-- Nozzle Coolers (coolant) don't degrade
-- Engine Control Unit (fuel economy) doesn't degrade
-- Sensors don't degrade
+- Upgrade ship systems to the maximum level
+    - Also repairs systems if they have degraded
+    - Affects all 10 ship systems
+        1. Turbopump System (acceleration)
+        1. Combusion Chambers (speed)
+        1. Nozzle Coolers (coolant)
+        1. Engine Control Unit (fuel economy)
+        1. Reinforced Plating (armor)
+        1. Thermal Insulation (heat and cold resistance)
+        1. Anti-Capacitive Shielding (shock resistance)
+        1. Maglock Dampener (cargo damage resistance)
+        1. Suit Station (suit charging)
+        1. Sensor Tuning (scanner range)
+    - Keeps you from having to continually waste your time and money trekking to Upgrade Shops every few minutes
+    - Does not upgrade or repair other parts of the ship such as the hull, cargo or items like Universal Control Circuits, skills like Cargo Clearance, or quest upgrades like the Hidden Compartment
+    - Might grant or interfere with the [Max Power achievement](https://truesteamachievements.com/a2941561/max-power-achievement) if you don't already have it
 
 #### Supported game versions
 

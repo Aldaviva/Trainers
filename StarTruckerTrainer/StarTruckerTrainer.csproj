@@ -65,12 +65,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cheats\NoFuelEconomyDegredationCheat.cs" />
-    <Compile Include="Cheats\NoSensorDegredationCheat.cs" />
-    <Compile Include="Cheats\NoNozzleCoolerDegredationCheat.cs" />
-    <Compile Include="Cheats\NoSpeedDegredationCheat.cs" />
-    <Compile Include="Cheats\NoAccelerationDegredationCheat.cs" />
-    <Compile Include="Cheats\ShipUpgradeLevelCheat.cs" />
+    <Compile Include="Cheats\MaxUpgradeLevelsCheat.cs" />
+    <Compile Include="Cheats\NoUpgradeDegredationCheat.cs" />
+    <Compile Include="Cheats\UpgradeCheat.cs" />
     <Compile Include="Games\StarTrucker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

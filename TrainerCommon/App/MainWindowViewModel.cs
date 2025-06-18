@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using KoKo.Property;
 using System;
@@ -16,6 +16,7 @@ public class MainWindowViewModel {
     public Game game { get; }
 
     public string windowTitle => $"{game.name} {game.supportedVersion} +{game.cheats.Count:N0} Trainer by Ben";
+    public int windowWidth { get; set; }
 
     public MainWindowViewModel(Game game, TrainerService trainerService) {
         this.game = game;

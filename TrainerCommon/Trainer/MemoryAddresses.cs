@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -53,5 +53,11 @@ public readonly struct IndirectMemoryAddress(ProcessHandle processHandle, string
             return memoryAddress;
         }
     }
+
+}
+
+public readonly struct OffsetMemoryAddress(MemoryAddress baseAddress, int offset): MemoryAddress {
+
+    public IntPtr address => IntPtr.Add(baseAddress.address, offset);
 
 }

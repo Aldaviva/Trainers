@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -47,7 +47,7 @@ public static class MemoryEditor {
         }
     }
 
-    public static void writeToProcessMemory(ProcessHandle processHandle, MemoryAddress memoryAddress, string value, Encoding? characterEncoding = default) {
+    public static void writeToProcessMemory(ProcessHandle processHandle, MemoryAddress memoryAddress, string value, Encoding? characterEncoding = null) {
         characterEncoding ??= DEFAULT_ENCODING;
         writeToProcessMemory(processHandle, memoryAddress, characterEncoding.GetBytes(value));
     }
@@ -55,6 +55,7 @@ public static class MemoryEditor {
     private static byte[] convertValueToBuffer<T>(T value) => value switch {
         byte[] bytes => bytes,
         int i        => BitConverter.GetBytes(i),
+        float f      => BitConverter.GetBytes(f),
         // strings are handled separately by writeToProcessMemory(ProcessHandle, MemoryAddress, string, Encoding?)
         _ => throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(convertValueToBuffer)} does not support input type {typeof(T)}")
     };
@@ -73,13 +74,12 @@ public static class MemoryEditor {
         return result;
     }
 
-    private static T convertBufferToType<T>(byte[] buffer) {
-        return (T) (object) (Type.GetTypeCode(typeof(T)) switch {
-            TypeCode.String => Encoding.Unicode.GetString(buffer, 0, buffer.Length).Split([(char) 0], 2)[0],
-            TypeCode.Int32  => BitConverter.ToInt32(BitConverter.IsLittleEndian ? buffer : buffer.Reverse().ToArray(), 0),
-            _               => throw new ArgumentOutOfRangeException()
-        });
-    }
+    private static T convertBufferToType<T>(byte[] buffer) => (T) (object) (Type.GetTypeCode(typeof(T)) switch {
+        TypeCode.String => Encoding.Unicode.GetString(buffer, 0, buffer.Length).Split([(char) 0], 2)[0],
+        TypeCode.Int32  => BitConverter.ToInt32(BitConverter.IsLittleEndian ? buffer : buffer.Reverse().ToArray(), 0),
+        TypeCode.Single => BitConverter.ToSingle(BitConverter.IsLittleEndian ? buffer : buffer.Reverse().ToArray(), 0),
+        _               => throw new ArgumentOutOfRangeException()
+    });
 
 }
 
