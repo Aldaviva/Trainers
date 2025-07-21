@@ -1,7 +1,8 @@
-﻿#nullable enable
+#nullable enable
 
-using System.Collections.Generic;
 using SuperhotMindControlDeleteTrainer.Cheats;
+using System.Collections.Generic;
+using System.Diagnostics;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
@@ -14,6 +15,6 @@ public class SuperhotMindControlDelete: BaseGame {
     public override string supportedVersion { get; } = "1.0.0";
     public override ICollection<Cheat> cheats { get; } = new List<Cheat> { new InfiniteHealthCheat() };
 
-    public override string getVersion(string executableSha256Hash) => "1.0.0";
+    public override string? getVersion(Process gameProcess) => "1.0.0";
 
 }

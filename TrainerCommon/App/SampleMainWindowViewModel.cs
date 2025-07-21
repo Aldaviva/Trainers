@@ -1,7 +1,8 @@
-﻿#nullable enable
+#nullable enable
 using Gma.System.MouseKeyHook;
 using KoKo.Property;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 using TrainerCommon.Trainer;
@@ -26,7 +27,7 @@ internal class SampleMainWindowViewModel: MainWindowViewModel {
             new SampleCheat("Infinite lives", "Shift+Control+Alt+L")
         };
 
-        public string getVersion(string executableSha256Hash) => "1";
+        public string? getVersion(Process gameProcess) => "1";
 
         private class SampleCheat: Cheat {
 

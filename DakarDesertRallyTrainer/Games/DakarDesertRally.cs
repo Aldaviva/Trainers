@@ -1,7 +1,8 @@
-﻿#nullable enable
+#nullable enable
 
 using DakarDesertRallyTrainer.Cheats;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
@@ -18,16 +19,19 @@ public class DakarDesertRally: BaseGame {
         new NoDamageCheat()
     ];
 
-    public override string? getVersion(string executableSha256Hash) => executableSha256Hash switch {
-        VersionSha256Hashes.V2_3_0_STEAM_2403  => Versions.V2_3_0_STEAM_2403,
-        VersionSha256Hashes.V2_3_420_EPIC_2403 => Versions.V2_3_420_EPIC_2403,
-        VersionSha256Hashes.V2_3_0_STEAM_2402  => Versions.V2_3_0_STEAM_2402,
-        VersionSha256Hashes.V1_9_0_STEAM_2304  => Versions.V1_9_0_STEAM_2304,
-        VersionSha256Hashes.V1_7_0_STEAM_2302  => Versions.V1_7_0_STEAM_2302,
-        VersionSha256Hashes.V1_6_0_STEAM_2301  => Versions.V1_6_0_STEAM_2301,
-        VersionSha256Hashes.V1_5_0_STEAM_2211  => Versions.V1_5_0_STEAM_2211,
-        _                                      => null
-    };
+    public override string? getVersion(Process gameProcess) {
+        string executableSha256Hash = readFileHash(gameProcess.MainModule!.FileName);
+        return executableSha256Hash switch {
+            VersionSha256Hashes.V2_3_0_STEAM_2403  => Versions.V2_3_0_STEAM_2403,
+            VersionSha256Hashes.V2_3_420_EPIC_2403 => Versions.V2_3_420_EPIC_2403,
+            VersionSha256Hashes.V2_3_0_STEAM_2402  => Versions.V2_3_0_STEAM_2402,
+            VersionSha256Hashes.V1_9_0_STEAM_2304  => Versions.V1_9_0_STEAM_2304,
+            VersionSha256Hashes.V1_7_0_STEAM_2302  => Versions.V1_7_0_STEAM_2302,
+            VersionSha256Hashes.V1_6_0_STEAM_2301  => Versions.V1_6_0_STEAM_2301,
+            VersionSha256Hashes.V1_5_0_STEAM_2211  => Versions.V1_5_0_STEAM_2211,
+            _                                      => null
+        };
+    }
 
     public static class Versions {
 

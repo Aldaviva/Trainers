@@ -3,7 +3,6 @@
 using Gma.System.MouseKeyHook;
 using StarTruckerTrainer.Games;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using TrainerCommon.Cheats;
 using TrainerCommon.Trainer;
@@ -15,6 +14,7 @@ public class UpgradeCheat: BaseCheat {
     private const string MODULE_NAME = "GameAssembly.dll";
 
     private static readonly int[]        OFFSETS_TEMPLATE_1_0_64 = [0x0290F700, 0xB8, 0x0, 0x80, 0x30, -1 /* ShipSystem */, 0x64]; // Assembly-CSharp.dll:UpgradeDef.m_currentLevel
+    private static readonly int[]        OFFSETS_TEMPLATE_1_0_67 = [0x02916B80, 0xB8, 0x0, 0x80, 0x30, -1, 0x64];
     private static readonly ShipSystem[] SHIP_SYSTEMS            = (ShipSystem[]) Enum.GetValues(typeof(ShipSystem));
 
     public override string name { get; } = "Repair all ship upgrades";
@@ -26,13 +26,14 @@ public class UpgradeCheat: BaseCheat {
         if (offsets == null) {
             int[] offsetTemplate = gameVersionCode switch {
                 StarTrucker.Versions.V1_0_64_STEAM => OFFSETS_TEMPLATE_1_0_64,
+                StarTrucker.Versions.V1_0_67_STEAM => OFFSETS_TEMPLATE_1_0_67,
                 _                                  => []
             };
 
             offsets = [..offsetTemplate];
         }
 
-        if (offsets?.Any() ?? false) {
+        if (offsets != null && offsets.Length != 0) {
             foreach (ShipSystem shipSystem in SHIP_SYSTEMS) {
                 offsets[5] = (int) shipSystem;
                 IndirectMemoryAddress currentLevelAddress           = new(processHandle, MODULE_NAME, offsets);

@@ -1,13 +1,10 @@
-﻿#nullable enable
+#nullable enable
 
 using KoKo.Property;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using TrainerCommon.Cheats;
@@ -44,10 +41,9 @@ public class TrainerServiceImpl: TrainerService {
         }
 
         monitorTask = Task.Run(async () => {
-            Process?       gameProcess        = null;
-            ProcessHandle? gameProcessHandle  = null;
-            string?        gameExecutableHash = null;
-            string?        gameVersionCode    = null;
+            Process?       gameProcess       = null;
+            ProcessHandle? gameProcessHandle = null;
+            string?        gameVersionCode   = null;
 
             while (!cancellationTokenSource.IsCancellationRequested) {
                 await Task.Delay(_attachmentState.Value switch {
@@ -77,15 +73,14 @@ public class TrainerServiceImpl: TrainerService {
                     continue;
                 }
 
-                if (gameExecutableHash == null) {
+                if (gameVersionCode == null) {
                     try {
-                        gameExecutableHash = readFileHash(gameProcess.MainModule!.FileName);
+                        gameVersionCode = game.getVersion(gameProcess);
                     } catch (InvalidOperationException) {
                         cleanUpGameProcess();
                         continue;
                     }
 
-                    gameVersionCode = game.getVersion(gameExecutableHash);
                     if (gameVersionCode == null) {
                         _attachmentState.Value = AttachmentState.UNSUPPORTED_PROGRAM_VERSION;
                     }
@@ -122,18 +117,10 @@ public class TrainerServiceImpl: TrainerService {
                 gameProcess?.Dispose();
                 gameProcess = null;
                 gameProcessHandle?.Dispose();
-                gameProcessHandle  = null;
-                gameExecutableHash = null;
-                gameVersionCode    = null;
+                gameProcessHandle = null;
+                gameVersionCode   = null;
             }
         }, cancellationTokenSource.Token);
-    }
-
-    /// <returns>lowercase hexadecimal SHA-256 hash of the file specified by <paramref name="filename"/></returns>
-    private static string readFileHash(string filename) {
-        using FileStream fileStream = File.OpenRead(filename);
-        using SHA256     sha256     = SHA256.Create();
-        return string.Join(string.Empty, sha256.ComputeHash(fileStream).Select(b => b.ToString("x2")));
     }
 
     public void Dispose() {

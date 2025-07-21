@@ -1,7 +1,8 @@
-﻿#nullable enable
+#nullable enable
 
-using System.Collections.Generic;
 using Dakar18Trainer.Cheats;
+using System.Collections.Generic;
+using System.Diagnostics;
 using TrainerCommon.Cheats;
 using TrainerCommon.Games;
 
@@ -14,6 +15,6 @@ public class Dakar18: BaseGame {
     public override string supportedVersion { get; } = "v.13";
     public override ICollection<Cheat> cheats { get; } = new List<Cheat> { new NoSpeedLimitCheat() };
 
-    public override string getVersion(string executableSha256Hash) => "v.13";
+    public override string getVersion(Process gameProcess) => "v.13";
 
 }

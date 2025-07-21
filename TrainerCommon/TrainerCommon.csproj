@@ -74,7 +74,7 @@
       <Version>5.7.1</Version>
     </PackageReference>
     <PackageReference Include="Unfucked">
-      <Version>0.0.1-beta.5</Version>
+      <Version>0.0.1-beta.10</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
