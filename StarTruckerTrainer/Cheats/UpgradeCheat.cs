@@ -13,8 +13,13 @@ public class UpgradeCheat: BaseCheat {
 
     private const string MODULE_NAME = "GameAssembly.dll";
 
+    /*
+     * Module offset tip: find acceleration object address using Mono > .NET Info, then pointerscan for it with max depth 6 and ending with the offsets [0 (last), 20, 30, 80, 0, b8].
+     * Does not require repeated value scanning or multiple process executions
+     */
     private static readonly int[]        OFFSETS_TEMPLATE_1_0_64 = [0x0290F700, 0xB8, 0x0, 0x80, 0x30, -1 /* ShipSystem */, 0x64]; // Assembly-CSharp.dll:UpgradeDef.m_currentLevel
     private static readonly int[]        OFFSETS_TEMPLATE_1_0_67 = [0x02916B80, 0xB8, 0x0, 0x80, 0x30, -1, 0x64];
+    private static readonly int[]        OFFSETS_TEMPLATE_1_0_70 = [0x02925368, 0xB8, 0x0, 0x80, 0x30, -1, 0x64];
     private static readonly ShipSystem[] SHIP_SYSTEMS            = (ShipSystem[]) Enum.GetValues(typeof(ShipSystem));
 
     public override string name { get; } = "Repair all ship upgrades";
@@ -27,6 +32,7 @@ public class UpgradeCheat: BaseCheat {
             int[] offsetTemplate = gameVersionCode switch {
                 StarTrucker.Versions.V1_0_64_STEAM => OFFSETS_TEMPLATE_1_0_64,
                 StarTrucker.Versions.V1_0_67_STEAM => OFFSETS_TEMPLATE_1_0_67,
+                StarTrucker.Versions.V1_0_70_STEAM => OFFSETS_TEMPLATE_1_0_70,
                 _                                  => []
             };
 

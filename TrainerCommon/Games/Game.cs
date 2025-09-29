@@ -33,6 +33,7 @@ public abstract class BaseGame: Game {
     public abstract string? getVersion(Process gameProcess);
 
     /// <returns>lowercase hexadecimal SHA-256 hash of the file specified by <paramref name="filename"/></returns>
+    /// <remarks>same output as <c>(Get-FileHash -Algorithm SHA256 $filename).Hash.ToLower()</c></remarks>
     protected static string readFileHash(string filename) {
         using FileStream fileStream = File.OpenRead(filename);
         using SHA256     sha256     = SHA256.Create();

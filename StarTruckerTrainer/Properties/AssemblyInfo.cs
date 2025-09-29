@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Star Trucker 1.0.64–1.0.67 +1 Trainer by Ben")]
-[assembly: AssemblyDescription("Star Trucker 1.0.64–1.0.67 +1 Trainer by Ben")]
+[assembly: AssemblyTitle("Star Trucker 1.0.64–1.0.70 +1 Trainer by Ben")]
+[assembly: AssemblyDescription("Star Trucker 1.0.64–1.0.70 +1 Trainer by Ben")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Hutchison")]
-[assembly: AssemblyProduct("Star Trucker 1.0.64–1.0.67 +1 Trainer by Ben")]
+[assembly: AssemblyProduct("Star Trucker 1.0.64–1.0.70 +1 Trainer by Ben")]
 [assembly: AssemblyCopyright("© 2025 Ben Hutchison")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -18,5 +18,5 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly
 )]
 
-[assembly: AssemblyVersion("1.0.13")]
-[assembly: AssemblyFileVersion("1.0.13")]
+[assembly: AssemblyVersion("1.0.14")]
+[assembly: AssemblyFileVersion("1.0.14")]

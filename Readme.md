@@ -97,6 +97,7 @@
 
 |Version|Distributor|Release date|Build|Changes|
 |-|-|-|-:|-|
+|[1.0.70](https://store.steampowered.com/news/app/2380050/view/497205194887528952)|Steam|2025-09-03|19755123|[Year One Anniversary](https://store.steampowered.com/news/app/2380050/view/497205194887528936?l=english): peripherals and speed traps|
 |[1.0.67](https://store.steampowered.com/news/app/2380050/view/527600233831464976)|Steam|2025-07-17|19103683|Mid-Session Difficulty Settings|
 |[1.0.64](https://store.steampowered.com/news/app/2380050/view/497197576207993354)|Steam|2025-06-12|18840658|[Perks, Plates, and Parking](https://store.steampowered.com/news/app/2380050/view/497197576207993320) plus fix for Heavy Duty UCCs disappearing|
 
